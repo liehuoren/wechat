@@ -1,0 +1,80 @@
+/**index.wxss**/
+.header {
+  width: 100%;
+  position: relative;
+}
+.header .banner {
+  width: 100%;
+}
+.header .text {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  z-index: 10;
+}
+.tools {
+  width: 100%;
+  height: 36px;
+  position: absolute;
+  top: 15px;
+  left: 0;
+}
+.tools .icon-search {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  top: 7px;
+  left: 25px;
+  z-index: 10;
+}
+.tools .icon-search image {
+  width: 100%;
+  height: 100%;
+}
+.tools input {
+  width: 70%;
+  border-radius: 50rpx;
+  height: 36px;
+  background: #f4f4f4;
+  color: #666;
+  padding-left: 35px;
+  margin-left: 15px;
+  float: left;
+}
+.tools .input-placeholder {
+  font-size: 16px;
+}
+.tools .icon-list {
+  width: 26px;
+  height: 26px;
+  float: right;
+  margin-right: 15px;
+  margin-top: 5px;
+}
+.container {
+  width: 96%;
+  padding: 2%;
+}
+.tab {
+  width: 100%;
+  height: 48px;
+  border-bottom: 1px solid #999;
+  text-align: center;
+}
+.tab text {
+  display: inline-block;
+  font-size: 18px;
+  width: 50%;
+  line-height: 48px;
+  
+}
+.tab .active {
+  border-bottom: 2px solid #ffaa2b;
+}
+.tab-1 {
+  width:80%;
+  margin: 20px auto;
+}
+.tab-1 video {
+  width: 100%;
+}
