@@ -1,10 +1,17 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs",
     "pages/cart/cart",
-    "pages/order/order",
-    "pages/user/user"
+    "pages/login/login",
+    "pages/user/user",
+    "pages/user/password/modify",
+    "pages/user/address/list/list",
+    "pages/about/index",
+    "pages/user/address/add/add",
+    "pages/user/address/edit/edit",
+    "pages/classify/index",
+    "pages/search/index",
+    "pages/order/list/list"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -32,7 +39,7 @@
         "selectedIconPath": "images/tab-cart-i.png"
       },
       {
-        "pagePath": "pages/order/order",
+        "pagePath": "pages/order/list/list",
         "text": "订单",
         "iconPath": "images/tab-order.png",
         "selectedIconPath": "images/tab-order.png"
@@ -47,6 +54,9 @@
   },
   "networkTimeout": {
     "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
     "downloadFile": 10000
-  }
+  },
+  "debug": false
 }

@@ -1,11 +1,14 @@
 <!--index.wxml-->
 <view class="header">
-  <image class="banner" src="/images/index-bar.png" mode="widthFix"></image>
   <view class="tools">
     <span class="icon-search"><icon type="search" size="22" color="#999"/></span>
     <input name="search" placeholder="搜索商品" confirm-type="search" />
-    <span class="icon-list"><image src="/images/icon-list.png" style="width: 100%;height: 100%"></image></span>
+    <navigator url="/pages/classify/index">
+      <span class="icon-list"><image src="/images/icon-list.png" style="width: 100%;height: 100%"></image></span>
+    </navigator>
   </view>
+  <image class="banner" src="/images/index-bar.png" mode="widthFix"></image>
+  
 </view>
 <view class="container">
   <view class="tab">

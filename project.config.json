@@ -11,7 +11,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.98",
+	"libVersion": "2.0.2",
 	"appid": "wxb394e95f359306be",
 	"projectname": "wechat-mall",
 	"isGameTourist": false,
