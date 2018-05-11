@@ -1,5 +1,0 @@
-<!--pages/cart/cart.wxml-->
-<view class="no-content tc">
-    <text class="no-content-icon iconfont icon-yemianwuneirong"></text>
-    <view class="no-content-font">购物车暂无商品</view>
-</view>

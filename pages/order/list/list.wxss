@@ -1,0 +1,23 @@
+/* pages/order/list/list.wxss */
+.topbar {
+  margin-top:0;
+  background:#fff;
+}
+.topbar-item.active {
+  color: #ffaa2b;
+}
+.topbar-item.active::after {
+  border-bottom: 1rpx solid #ffaa2b;
+}
+.topbar-item {
+  color:#333;
+  text-align:center;
+  padding:10px 0;
+}
+.text-right {
+  float: right;
+}
+.action {
+  color: #ffaa2b;
+}
+

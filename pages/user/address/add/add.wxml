@@ -1,0 +1,51 @@
+<!--pages/user/address/add/add.wxml-->
+<view class="page">
+  <form bindsubmit="submitForm">
+    <view class="weui-cells">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">收货人</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input name="name" class="weui-input" type="text" placeholder="" />
+            </view>
+        </view>
+        
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">联系电话</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input name="tel" class="weui-input" type="tel" placeholder="" />
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_select">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                <view class="weui-label">所在地区</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker  mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+                    <view class="weui-select weui-select_in-select-after">{{region[0]}}，{{region[1]}}，{{region[2]}}</view>
+                </picker>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_textarea">
+            <view class="weui-cell__hd">
+                <view class="weui-label">详细地址</view>
+            </view>
+            <view class="weui-cell__bd">
+                <textarea name="address" class="weui-textarea" placeholder="请输入详细地址信息，如道路、门牌号、小区、 楼栋号、单元室等" style="height: 4em" />
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_switch">
+            <view class="weui-cell__bd">设为默认</view>
+            <view class="weui-cell__ft">
+                <switch name="is_def" color="#ffaa2b" />
+            </view>
+        </view>
+    </view>
+    <view class="button-sp-area">
+        <button class="weui-btn" type="primary" formType="submit">保存</button>
+    </view>
+  </form>
+</view>

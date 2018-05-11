@@ -1,0 +1,40 @@
+.goods-list {
+  width: 100%;
+}
+.goods-list .weui-panel::before, .goods-list .weui-panel::after {
+  border: none;
+}
+
+
+
+.goods-list .weui-media-box {
+  padding: 15px 5px;
+}
+.goods-list .weui-media-box__hd_in-appmsg {
+  width: 100px;
+  height: 100px;
+}
+.goods-list .weui-media-box__title {
+  font-size: 16px;
+  line-height: 17px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  white-space: normal;
+}
+.goods-list .weui-media-box__desc {
+  font-size: 14px;
+  margin-top: 10px;
+}
+.goods-list .weui-media-box__info {
+  margin-top: 22px;
+  color: #999;
+}
+.goods-list .text-right {
+  float: right;
+  padding-right: 1em;
+}
+.goods-list .price {
+  color: #ffaa2b;
+  font-size: 15px;
+}

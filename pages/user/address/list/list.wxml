@@ -1,0 +1,63 @@
+<!--pages/user/address/list/list.wxml-->
+<view class="address-list">
+  <view class="scroll-list" wx:if="{{ true }}">
+      <view class="weui-panel">
+        <view class="weui-panel__bd">
+          <view class="weui-media-box weui-media-box_text" >
+            <view class="weui-media-box__title weui-media-box__title_in-text">
+              <text>小张五金的客户</text>
+              <text class="weui-cell__ft right">15012991563</text>
+            </view>
+            <view class="weui-media-box__desc">上海市杨浦区昆明路518号北美广场A座1020室</view>
+            <view class="weui-media-box__info">
+              <view class="weui-media-box__info__meta text-orangered"><image src="/images/icon-check.png" class="icon-check"></image></view>
+              <view class="weui-media-box__info__meta text-orangered">默认地址</view>
+              <view class="right">
+                <view class="weui-media-box__info__meta text-orangered tool" bindtap="edit">
+                  <image src="/images/icon-edit.png" class="icon"></image>
+                  <text>编辑</text>
+                </view>
+                <view class="weui-media-box__info__meta text-orangered tool" bindtap="delete">
+                  <image src="/images/icon-del.png" class="icon"></image>
+                  <text>删除</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-panel">
+        <view class="weui-panel__bd">
+          <view class="weui-media-box weui-media-box_text" >
+            <view class="weui-media-box__title weui-media-box__title_in-text">
+              <text>小张五金的客户</text>
+              <text class="weui-cell__ft right">15012991563</text>
+            </view>
+            <view class="weui-media-box__desc">上海市杨浦区昆明路518号北美广场A座1020室</view>
+            <view class="weui-media-box__info">
+              <view class="weui-media-box__info__meta text-orangered"><image src="/images/icon-nocheck.png" class="icon-check"></image></view>
+              <view class="weui-media-box__info__meta text-orangered">默认地址</view>
+              <view class="right">
+                <view class="weui-media-box__info__meta text-orangered tool">
+                  <image src="/images/icon-edit.png" class="icon"></image>
+                  <text>编辑</text>
+                </view>
+                <view class="weui-media-box__info__meta text-orangered tool">
+                  <image src="/images/icon-del.png" class="icon"></image>
+                  <text>删除</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+    </view>
+  </view>
+  <view class="empty" wx:else>
+      <image src="/images/address-bg-empty.png"></image>
+      <view class="title">您还没有添加地址</view>
+      <view class="desc">快去添加地址吧！</view>
+    </view>
+    <view class="bottom-btn">
+      <button type="primary" class="add-btn" bindtap="add">添加新地址</button>
+    </view>
+</view>

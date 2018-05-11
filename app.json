@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/cart/cart",
     "pages/login/login",
     "pages/user/user",
     "pages/user/password/modify",
@@ -11,7 +10,8 @@
     "pages/user/address/edit/edit",
     "pages/classify/index",
     "pages/search/index",
-    "pages/order/list/list"
+    "pages/order/list/list",
+    "pages/cart/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -33,7 +33,7 @@
         "selectedIconPath": "images/tab-index-i.png"
       },
       {
-        "pagePath": "pages/cart/cart",
+        "pagePath": "pages/cart/index",
         "text": "进货单",
         "iconPath": "images/tab-cart.png",
         "selectedIconPath": "images/tab-cart-i.png"

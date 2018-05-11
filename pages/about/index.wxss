@@ -1,0 +1,87 @@
+/* pages/about/index.wxss */
+.page {
+  height: 100%;
+  background-color: #ffffff;
+  padding-top: 30p;
+}
+.logo {
+  width: 243rpx;
+  height: 243rpx;
+  
+  margin: 0 auto;
+  text-align: center;
+  line-height:243rpx;
+  background-size:243rpx 243rpx;
+}
+.logo image {
+  width: 181rpx;
+  height: 76rpx;
+  display: inline-block; 
+  vertical-align: middle;
+}
+.page__bd {
+  margin-top: 30px;
+}
+.weui-cells:before, .weui-cells:after {
+  border: none;
+}
+.weui-cell {
+  padding: 15px;
+}
+.weui-cell:after {
+  border: 1px solid #999;
+}
+.weui-panel:before {
+  border: none;
+}
+.weui-panel {
+  margin-top: 0;
+}
+.weui-media-box__title, .weui-cell {
+  font-size: 16px;
+}
+.weui-media-box__desc {
+  padding-top: 10rpx;
+}
+.weui-media-box {
+  padding: 10px 15px;
+}
+.weui-media-box__desc {
+  line-height: 16px;
+  padding-left: 35px;
+}
+.weui-cell:after{
+  content:" ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 15px;
+  height: 1px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1rpx solid #d9d9d9;
+  color: #d9d9d9;
+  left: 15px;
+}
+.weui-cells .weui-cell:before {
+  border: none;
+  display: none!important;
+}
+.weui-cell:first-child:after{
+  display:none
+}
+.weui-media-box:before {
+  display:none
+}
+.weui-media-box:after {
+  content:" ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 15px;
+  height: 1px;
+  border-bottom: 1rpx solid #d9d9d9;
+  color: #d9d9d9;
+  left: 15px;
+}

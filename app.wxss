@@ -1,5 +1,7 @@
 /**app.wxss**/
 @import 'styles/weui.wxss';
+@import 'styles/prompt.wxss';
+@import 'styles/list.wxss';
 
 page {
   width: 100%;
@@ -14,4 +16,9 @@ button[type=primary] {
 }
 button-hover {
   background-color: #ff9f10!important;
+}
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
 }

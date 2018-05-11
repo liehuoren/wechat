@@ -1,0 +1,35 @@
+/* pages/user/password/modifyPassword.wxss */
+.page {
+  height: 100%;
+  overflow: hidden;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.modify-form {
+  padding: 0 80rpx;
+  margin-top: 50px;
+}
+
+.weui-cells:before, .weui-cells:after {
+  border: 0;
+}
+.weui-cell:before, .weui-cell:after {
+  border: 0;
+}
+
+.weui-cells {
+  text-align: left;
+}
+.weui-cell_input {
+  border: 1px solid #ffaa2b;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.weui-cell_input .input-placeholder {
+  font-size: 16px;
+}
+.modify-form button {
+  margin-top: 30px;
+  background-color: #ffaa2b;
+}

@@ -1,4 +1,6 @@
 <!--index.wxml-->
+<import src="../common/list.wxml"/>
+
 <view class="page">
 
 <view class="header">
@@ -7,79 +9,59 @@
                 autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
         <block wx:for="{{banners}}" wx:key="id">
             <swiper-item>
-                <image bindtap="tapBanner" data-id="{{item.businessId}}" src="{{item.img_url}}" class="slide-image" width="750rpx" height="562.5rpx"/>
+                <image bindtap="tapBanner" src="{{item.img_url}}" class="slide-image" width="750rpx" height="562.5rpx"/>
+                <view class="slide-text">
+                  <view class="slide-title">
+                    <span class="line"></span>
+                    <text class="title">{{item.link_title}}</text>
+                    <span class="line"></span>
+                  </view>
+                  <view class="slide-dec">
+                    小张五金着力与您共创美好生活
+                  </view>
+                </view>
+                
             </swiper-item>
         </block>
     </swiper>
     <view class="dots">  
-        <block wx:for="{{banners}}" wx:key="unique">  
+        <block wx:for="{{banners}}" wx:key="unique"> 
             <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>  
         </block>  
     </view>  
   </view>
-</view>
-
-<view class="tools">
-    <span class="icon-search"><icon type="search" size="22" color="#999"/></span>
-    <input name="search" placeholder="搜索商品" confirm-type="search" />
-    <navigator url="/pages/classify/index">
-      <span class="icon-list"><image src="/images/icon-list.png" style="width: 100%;height: 100%"></image></span>
-    </navigator>
-</view>
-
-
-
   <view class="tools">
-    <span class="icon-search"><icon type="search" size="22" color="#999"/></span>
-    <input name="search" placeholder="搜索商品" confirm-type="search" />
+    <view class="search" bindtap="toSearch"><span class="icon-search"><icon type="search" size="20" color="#999" bindtap="toSearch"/></span>搜索商品</view>
     <navigator url="/pages/classify/index">
       <span class="icon-list"><image src="/images/icon-list.png" style="width: 100%;height: 100%"></image></span>
     </navigator>
   </view>
-  <image class="banner" src="/images/index-bar.png" mode="widthFix"></image>
+</view>
   
 <view class="container">
   <view class="tab">
-    <text class="active">视频介绍</text>
-    <text>公司简介</text>
+    <text class="{{ tabAction == 'video' ? 'active': '' }}" data-tab="video" bindtap="tabClick">视频介绍</text>
+    <text class="{{ tabAction == 'company' ? 'active': '' }}" data-tab="company" bindtap="tabClick">公司简介</text>
   </view>
-  <view class="tab-1">
-    <video poster="/images/video.png"></video>
+  <view class="tab-content">
+    <view class="tab-video {{ tabAction == 'video' ? 'active': '' }}">
+      <video poster="/images/video.png"></video>
+    </view>
+    <view class="tab-company {{ tabAction == 'company' ? 'active': '' }}">
+      <text>小张五金</text>
+    </view>
   </view>
-  <view>
-    <view style='text-align: center;color: #ffaa2b;margin-bottom: 15px;'>
-      <text>主营热推商品</text>
+  
+  <view class="hot-goods">
+    <view class="title">
+      <span></span><text>主营热推商品</text><span></span>
     </view>
-    <view class="goods" style="widht:100%; height: 138px; margin:20px 0;padding-bottom:20px;border-bottom:1px solid #999">
-      <view class="left" style="width:40%;height: 138px;float:left;margin-right:5%;"><image src="/images/goods.png" style="width: 100%; height: 100%;"></image></view>
-      <view class="right" style="width: 55%;height: 138px;float: right;position:relative">
-        <text class="title" style="font-size: 18px;">潜水艇洗衣机专用地漏卫生间淋浴房阳台地面双排漏水器</text>
-        <view class="label" style="font-size: 14px; color: #999;">
-          <span style="float: left;">商品货号：00101</span>
-          <span style="float: right;">剩余：999件</span>
-        </view>
-        <view class="bottom" style="width:100%;position:absolute;bottom:0;font-size: 14px; color: #999;">
-          <span style="float: left;color:#ffaa2b;font-size:16px;">￥56.0</span>
-          <span style="float: right;">月销：289件</span>
-        </view>
-      </view>
-    </view>
-    <view class="goods" style="widht:100%; height: 138px; margin:20px 0;padding-bottom:20px;border-bottom:1px solid #999">
-      <view class="left" style="width:40%;height: 138px;float:left;margin-right:5%;"><image src="/images/goods.png" style="width: 100%; height: 100%;"></image></view>
-      <view class="right" style="width: 55%;height: 138px;float: right;position:relative">
-        <text class="title" style="font-size: 18px;">潜水艇洗衣机专用地漏卫生间淋浴房阳台地面双排漏水器</text>
-        <view class="label" style="font-size: 14px; color: #999;">
-          <span style="float: left;">商品货号：00101</span>
-          <span style="float: right;">剩余：999件</span>
-        </view>
-        <view class="bottom" style="width:100%;position:absolute;bottom:0;font-size: 14px; color: #999;">
-          <span style="float: left;color:#ffaa2b;font-size:16px;">￥56.0</span>
-          <span style="float: right;">月销：289件</span>
-        </view>
-      </view>
-    </view>
+    <template is="list" data="{{ goods, prompt }}"/>
+    <view class="more" wx:if="{{ prompt.hidden }}" bindtap='more'>加载更多</view>
+    
   </view>
 </view>
+
 </view>
 
 
