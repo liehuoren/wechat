@@ -7,7 +7,7 @@ Page({
   data: {
     prompt: {
       hidden: 0,
-      icon: '/images/empty.png',
+      icon: '/images/cart-empty.png',
       title: '购物车空空如也',
       text: '来挑几件好货吧',
       buttons: [
