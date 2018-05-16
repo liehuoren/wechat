@@ -74,6 +74,11 @@ Page({
   },
   more () {
     
+  },
+  goodDetails (e) {
+    wx.navigateTo({
+      url: '/pages/goods/index',
+    })
   }
   
 })

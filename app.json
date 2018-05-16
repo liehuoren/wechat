@@ -11,7 +11,8 @@
     "pages/classify/index",
     "pages/search/index",
     "pages/order/list/list",
-    "pages/cart/index"
+    "pages/cart/index",
+    "pages/goods/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

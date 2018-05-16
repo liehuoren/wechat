@@ -30,7 +30,8 @@ Page({
       { name: '劳保', id: '4' }
     ],
     inputShowed: false,
-    inputVal: ""
+    inputVal: "",
+    value: '全部'
   },
 
   /**
@@ -66,6 +67,11 @@ Page({
   inputTyping: function (e) {
     this.setData({
       inputVal: e.detail.value
+    });
+  },
+  changeTab(e) {
+    this.setData({
+      activeIndex: e.currentTarget.dataset.index
     });
   }
 })

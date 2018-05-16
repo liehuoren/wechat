@@ -18,7 +18,7 @@ Page({
     },
     prompt: {
       hidden: !0,
-      icon: '../../../assets/images/iconfont-order-default.png',
+      icon: '../../../images/iconfont-order-default.png',
       title: '您还没有相关的订单',
       text: '可以去看看有哪些想买的',
     },
@@ -49,5 +49,58 @@ Page({
         }
       ]
     })
+  },
+  onTapTag(e) {
+    if (e.currentTarget.dataset.index == 3) {
+      this.setData({
+        activeIndex: e.currentTarget.dataset.index,
+        order: {
+          items: [
+            
+          ],
+          page: {
+            total: 0
+          }
+        },
+      })
+    } else if (e.currentTarget.dataset.index == 2) {
+      this.setData({
+        activeIndex: e.currentTarget.dataset.index,
+        order: {
+          items: [
+            { id: 2, active: '已配送', createtime: '2018-3-25 11:30', image_url: '/images/goods.png', title: '公牛开关插座86型暗装饰墙壁电源 面板三五孔电脑墙壁电源插座面板', name: '小张五金的客户', total: '2', total_price: '112', address: '上海市杨浦区昆明路518号北美广场A座1020室' }
+          ],
+          page: {
+            total: 1
+          }
+        },
+      })
+    } else if (e.currentTarget.dataset.index == 1) {
+      this.setData({
+        activeIndex: e.currentTarget.dataset.index,
+        order: {
+          items: [
+            { id: 2, active: '已下单', createtime: '2018-3-25 11:30', image_url: '/images/goods.png', title: '公牛开关插座86型暗装饰墙壁电源 面板三五孔电脑墙壁电源插座面板', name: '小张五金的客户', total: '2', total_price: '112', address: '上海市杨浦区昆明路518号北美广场A座1020室' }
+          ],
+          page: {
+            total: 1
+          }
+        },
+      })
+    } else {
+      this.setData({
+        activeIndex: e.currentTarget.dataset.index,
+        order: {
+          items: [
+            { id: 2, active: '已配送', createtime: '2018-3-25 11:30', image_url: '/images/goods.png', title: '公牛开关插座86型暗装饰墙壁电源 面板三五孔电脑墙壁电源插座面板', name: '小张五金的客户', total: '2', total_price: '112', address: '上海市杨浦区昆明路518号北美广场A座1020室' },
+            { id: 2, active: '已下单', createtime: '2018-3-25 11:30', image_url: '/images/goods.png', title: '公牛开关插座86型暗装饰墙壁电源 面板三五孔电脑墙壁电源插座面板', name: '小张五金的客户', total: '2', total_price: '112', address: '上海市杨浦区昆明路518号北美广场A座1020室' }
+          ],
+          page: {
+            total: 1
+          }
+        },
+      })
+    }
+    
   }
 })

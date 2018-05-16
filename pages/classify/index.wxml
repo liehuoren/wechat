@@ -35,4 +35,11 @@
 </view>
 
 </view>
-
+<view class="select" bindtap='select'>
+  <image src="/images/select.png"></image>
+</view>
+<picker-view indicator-class="select-indicator" mask-class="select-mask" value="{{value}}" bindchange="selectValue">
+  <picker-view-column>
+      <view wx:for="{{classify}}" style="line-height: 50px">{{ item.name }}</view>
+    </picker-view-column>
+</picker-view>

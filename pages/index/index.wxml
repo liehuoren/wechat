@@ -9,7 +9,7 @@
                 autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
         <block wx:for="{{banners}}" wx:key="id">
             <swiper-item>
-                <image bindtap="tapBanner" src="{{item.img_url}}" class="slide-image" width="750rpx" height="562.5rpx"/>
+                <image bindtap="tapBanner" src="{{item.img_url}}" class="slide-image" />
                 <view class="slide-text">
                   <view class="slide-title">
                     <span class="line"></span>

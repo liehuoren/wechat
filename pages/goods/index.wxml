@@ -1,0 +1,147 @@
+<!--pages/goods/index.wxml-->
+<view class="page">
+
+<view class="header">
+  <view class="swiper-container">
+    <swiper class="swiper_box" 
+                autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
+        <block wx:for="{{product.product_images}}" wx:key="id">
+            <swiper-item>
+                <image bindtap="tapBanner" src="{{item.img_url}}" class="slide-image"/>
+            </swiper-item>
+        </block>
+    </swiper>
+    <view class="dots">  
+        <block wx:for="{{product.product_images}}" wx:key="unique"> 
+            <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>  
+        </block>  
+    </view>  
+  </view>
+  <view class="weui-panel">
+      <view class="weui-panel__bd">
+          <view class="weui-media-box weui-media-box_text">
+              <view class="weui-media-box__title weui-media-box__title_in-text price">￥{{ product.price_range }}</view>
+              <view class="weui-media-box__desc">{{ product.product_name }}</view>
+              <view class="weui-media-box__info text-right">
+                  <view class="weui-media-box__info__meta">月销：{{ product.sell_month }}</view>
+                  <view class="weui-media-box__info__meta">剩余：{{ product.surplus }}</view>
+              </view>
+          </view>
+      </view>
+  </view>
+</view>
+<view class="weui-cells weui-cells_after-title specification-select" bindtap="tobuy">
+  <view class="weui-cell weui-cell_access">
+      <view class="weui-cell__hd">规格</view>
+      <view class="weui-cell__bd">选择商品规格</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+  </view>
+</view>
+
+<view class="container">
+  <view class="tab">
+    <text class="{{ tabAction == 'details' ? 'active': '' }}" data-tab="details" bindtap="tabClick">商品详情</text>
+    <text class="{{ tabAction == 'parameter' ? 'active': '' }}" data-tab="parameter" bindtap="tabClick">商品参数</text>
+  </view>
+  <view class="tab-content">
+    <view class="tab-details {{ tabAction == 'details' ? 'active': '' }}">
+      <block wx:for="{{ product.product_images }}" wx:key="">
+        <view class="details">
+          <image src='{{ item.img_url }}'></image>
+        </view>
+      </block>
+      <view class="bottom">
+        <span></span><text>已经到底了</text><span></span>
+      </view>
+    </view>
+    <view class="tab-parameter {{ tabAction == 'parameter' ? 'active': '' }}">
+      <view class="weui-cells weui-cells_after-title specification-select">
+        <view class="weui-cell">
+            <view class="weui-cell__hd"><view class="weui-label">型号</view></view>
+            <view class="weui-cell__bd">G20珍珠白</view>
+        </view>
+        <view class="weui-cell">
+            <view class="weui-cell__hd"><view class="weui-label">品牌</view></view>
+            <view class="weui-cell__bd">BULL/公牛 两开双控</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="footer">
+   <view class="add">
+    <view class="add-left">
+      <image src="/images/add-cart.png"></image>
+      <text>进货单</text>
+    </view>
+    <view class="add-right">
+      <button bindtap="tobuy">加入进货单</button>
+    </view>
+  </view> 
+</view>
+
+<view class="show-popup" hidden="{{hideShopPopup}}">
+  <view class="popup-mask" bindtap="closePopupTap"></view>
+  <view class="select">
+    <view class="weui-panel weui-panel_access">
+        <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                    <image class="weui-media-box__thumb" src="{{ product.product_images[0].img_url }}" />
+                </view>
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                    <view class="weui-media-box__title">{{ product.product_name }}</view>
+                    <view class="weui-media-box__desc price">
+                      ￥{{ product.price_range }}
+                    </view>
+                    <view class="weui-media-box__info text-right">
+                      <view class="weui-media-box__info__meta">库存：{{ product.surplus }}</view>
+                      <view class="weui-media-box__info__meta">月销：{{ product.sell_month }}件</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="weui-panel">
+      <view class="weui-panel__hd">规格</view>
+          <view class="weui-panel__bd">
+              <view class="weui-flex">
+                  <view class="weui-flex__item"><view class="placeholder active">型号：G20珍珠白</view></view>
+                  <view class="weui-flex__item"><view class="placeholder">型号：G20珍珠白</view></view>
+              </view>
+              <view class="weui-flex">
+                  <view class="weui-flex__item"><view class="placeholder">型号：G20珍珠白</view></view>
+                  <view class="weui-flex__item"><view class="placeholder">型号：G20珍珠白</view></view>
+              </view>
+              <view class="weui-flex">
+                  <view class="weui-flex__item"><view class="placeholder">型号：G20珍珠白</view></view>
+                  <view class="weui-flex__item"><view class="placeholder">型号：G20珍珠白</view></view>
+              </view>
+              <view class="weui-flex">
+                  <view class="weui-flex__item"><view class="placeholder">型号：G20珍珠白</view></view>
+                  <view class="weui-flex__item"><view class="placeholder">型号：G20珍珠白</view></view>
+              </view>
+          </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_switch">
+            <view class="weui-cell__bd">购买数量</view>
+            <view class="weui-cell__ft">
+                <view class="num-box">
+                    <view class="num-jian {{buyNumber == buyNumMin ? 'hui': ''}}" bindtap="numJianTap">-</view>
+                    <view class="num-input">
+                       <input  type="number" value="{{buyNumber}}" disabled/>
+                    </view>
+                    <view class="num-jia {{buyNumber== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap">+</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="select-button">
+      <button class="add-button">加入进货单</button>
+    </view>
+  </view>
+</view>
+
+</view>
