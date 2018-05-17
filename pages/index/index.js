@@ -41,12 +41,12 @@ Page({
       }
     },
     prompt: {
-      hidden: !0
+      hidden: true
     }
   },
   
   onLoad: function () {
-    http.httpGet("/app/home/top",{},function(res){
+    http.httpPost("/app/home/top",'',function(res){
       console.log(res)
     })
   },

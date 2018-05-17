@@ -1,4 +1,4 @@
-var root = 'https://api-small.worktoapp.com';
+var root = 'https://smallapi.ittun.com';
 function Get(url, data, cb) {
   wx.showNavigationBarLoading();
   wx.request({
@@ -18,15 +18,15 @@ function Get(url, data, cb) {
 
 function Post(url, data, cb) {
   wx.request({
-    method: 'POST',
     url: root + url,
     data: data,
+    dataType: 'json',
+    method: 'POST',
     success: (res) => {
-      typeof cb == "function" && cb(res.data, "");
+      typeof cb == "function" && cb(upperJSONKey(res.data), "");
     },
     fail: (err) => {
       typeof cb == "function" && cb(null, err.errMsg);
-      console.log("http请求:" + config.HTTP_url);
       console.log(err)
     }
   });
@@ -51,7 +51,16 @@ function Upload(url, file, data, cb) {
     }
   });
 };
-
+function upperJSONKey(jsonObj) {
+  for (var key in jsonObj) {
+    if (Array.isArray(jsonObj[key]) || Object.keys(jsonObj[key]).length > 1) {
+      jsonObj[key] = upperJSONKey(jsonObj[key])
+    }
+    jsonObj["\"" + key.toLowerCase() + "\""] = jsonObj[key];
+    delete (jsonObj[key]);
+  }
+  return jsonObj;
+};
 
 module.exports = {
   httpGet: Get,

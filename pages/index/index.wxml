@@ -58,6 +58,7 @@
     </view>
     <template is="list" data="{{ goods, prompt }}"/>
     <view class="more" wx:if="{{ prompt.hidden }}" bindtap='more'>加载更多</view>
+    <view class="end" wx:else>到底了</view>
     
   </view>
 </view>

@@ -52,12 +52,5 @@
         "selectedIconPath": "images/tab-me-i.png"
       }
     ]
-  },
-  "networkTimeout": {
-    "request": 10000,
-    "connectSocket": 10000,
-    "uploadFile": 10000,
-    "downloadFile": 10000
-  },
-  "debug": false
+  }
 }
