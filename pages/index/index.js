@@ -1,4 +1,5 @@
 var http = require('/../../utils/http.js')
+var util = require('/../../utils/util.js')
 //index.js
 //获取应用实例
 const app = getApp()
@@ -6,18 +7,7 @@ const app = getApp()
 Page({
   data: {
     banners: [
-      {
-        link_title: "专精品质，至诚服务",
-        img_url: "/images/index-bar.png"
-      },
-      {
-        link_title: "专精品质，至诚服务",
-        img_url: "/images/index-bar.png"
-      },
-      {
-        link_title: "专精品质，至诚服务",
-        img_url: "/images/index-bar.png"
-      },
+      
     ],
     autoplay: true,
     interval: 3000,
@@ -46,9 +36,7 @@ Page({
   },
   
   onLoad: function () {
-    http.httpPost("/app/home/top",'',function(res){
-      console.log(res)
-    })
+    
   },
   //事件处理函数
   bindViewTap: function () {
@@ -78,6 +66,19 @@ Page({
   goodDetails (e) {
     wx.navigateTo({
       url: '/pages/goods/index',
+    })
+  },
+  onLaunch: function () {
+    var that = this
+    http.httpPost("/app/home/top", '', {}, function (res) {
+      util.upperJSONKey(res.data)
+      util.upperListKey(res.data.banner_list)
+      console.log(res.data.banner_list)
+      that.setData({
+        banners: res.data.banner_list,
+        companyInfomation: res.data.company_infomation,
+        videoUrl: res.data.video_url
+      })
     })
   }
   

@@ -1,10 +1,12 @@
 var root = 'https://smallapi.ittun.com';
-function Get(url, data, cb) {
+var app = getApp()
+function Get(url, data, header, cb) {
   wx.showNavigationBarLoading();
   wx.request({
     method: 'GET',
     url: root + url,
     data: data,
+    header: Object.assign({}, app.globalData.header, header),
     success: (res) => {
       typeof cb == "function" && cb(res.data, "");
       wx.hideNavigationBarLoading();
@@ -16,14 +18,15 @@ function Get(url, data, cb) {
   });
 };
 
-function Post(url, data, cb) {
+function Post(url, data, header, cb) {
   wx.request({
     url: root + url,
     data: data,
+    header: Object.assign({}, app.globalData.header, header),
     dataType: 'json',
     method: 'POST',
     success: (res) => {
-      typeof cb == "function" && cb(upperJSONKey(res.data), "");
+      typeof cb == "function" && cb(res.data, "");
     },
     fail: (err) => {
       typeof cb == "function" && cb(null, err.errMsg);
@@ -40,7 +43,7 @@ function Upload(url, file, data, cb) {
     formData: data,
     success: (res) => {
       if (typeof (res.data) == "string") {
-        typeof cb == "function" && cb(JSON.parse(res.data), "");
+        typeof cb == "function" && cb(res.data, "");
       } else {
         typeof cb == "function" && cb(res.data, "");
       }
@@ -50,16 +53,6 @@ function Upload(url, file, data, cb) {
       typeof cb == "function" && cb(null, err.errMsg);
     }
   });
-};
-function upperJSONKey(jsonObj) {
-  for (var key in jsonObj) {
-    if (Array.isArray(jsonObj[key]) || Object.keys(jsonObj[key]).length > 1) {
-      jsonObj[key] = upperJSONKey(jsonObj[key])
-    }
-    jsonObj["\"" + key.toLowerCase() + "\""] = jsonObj[key];
-    delete (jsonObj[key]);
-  }
-  return jsonObj;
 };
 
 module.exports = {
