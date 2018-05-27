@@ -1,4 +1,9 @@
 // pages/goods/index.js
+
+var http = require('/../../utils/http.js')
+var util = require('/../../utils/util.js')
+var WxParse = require('../../wxParse/wxParse.js');
+
 Page({
 
   /**
@@ -6,28 +11,17 @@ Page({
    */
   data: {
     product:{
-      product_id: '1',
-      product_name: '公牛开关插座86型暗装饰墙壁电源面板三五孔电脑电视 珠光白',
-      surplus: '100',
-      sell_month: '50',
-      price_range: '56.0',
-      product_images: [
-        { img_url: '/images/goods1.png' },
-        { img_url: '/images/goods2.png' },
-        { img_url: '/images/goods3.png' },
-        { img_url: '/images/goods4.png' },
-        { img_url: '/images/goods5.png' },
-      ],
-      product_params: [
-        { param_id: '1', param_name: '' },
-        { param_id: '1', param_name: '' }
-      ],
-      product_specifications: [
-        { specification_id: '1', specification_name: '', specification_price: '' },
-        { specification_id: '1', specification_name: '', specification_price: '' },
-        { specification_id: '1', specification_name: '', specification_price: '' }
-      ]
+      
     },
+    product_images: [
+
+    ],
+    product_params: [
+      
+    ],
+    product_specifications: [
+      
+    ],
     autoplay: true,
     interval: 3000,
     duration: 1000,
@@ -43,7 +37,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    
+    let that = this
+    if (options) {
+      http.httpPost("/app/product/id", {PRODUCT_ID: options.id}, {}, function (res) {
+        util.upperJSONKey(res.data)
+        util.upperJSONKey(res.data.product)
+        util.upperListKey(res.data.product_images)
+        util.upperListKey(res.data.product_params)
+        util.upperListKey(res.data.product_specifications)
+        console.log(res.data)
+        
+        that.setData({
+          product: res.data.product,
+          product_images: res.data.product_images,
+          product_params: res.data.product_params,
+          product_specifications: res.data.product_specifications
+        })
+        WxParse.wxParse('article', 'html', res.data.product.product_detail, that, 5);
+      })
+    }
   },
 
   /**

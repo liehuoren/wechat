@@ -45,10 +45,10 @@
   </view>
   <view class="tab-content">
     <view class="tab-video {{ tabAction == 'video' ? 'active': '' }}">
-      <video poster="/images/video.png"></video>
+      <video poster="/images/video.png" src="{{videoUrl}}"></video>
     </view>
     <view class="tab-company {{ tabAction == 'company' ? 'active': '' }}">
-      <text>小张五金</text>
+      <text>{{companyInfomation}}</text>
     </view>
   </view>
   
@@ -57,7 +57,7 @@
       <span></span><text>主营热推商品</text><span></span>
     </view>
     <template is="list" data="{{ goods, prompt }}"/>
-    <view class="more" wx:if="{{ prompt.hidden }}" bindtap='more'>加载更多</view>
+    <view class="more" wx:if="{{ goods.page.currentPage<goods.page.totalPage }}" bindtap='more'>加载更多</view>
     <view class="end" wx:else>到底了</view>
   </view>
 </view>

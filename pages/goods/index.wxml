@@ -1,18 +1,19 @@
 <!--pages/goods/index.wxml-->
+<import src="../../wxParse/wxParse.wxml" />
 <view class="page">
 
 <view class="header">
   <view class="swiper-container">
     <swiper class="swiper_box" 
                 autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
-        <block wx:for="{{product.product_images}}" wx:key="id">
+        <block wx:for="{{product_images}}" wx:key="">
             <swiper-item>
-                <image bindtap="tapBanner" src="{{item.img_url}}" class="slide-image"/>
+                <image bindtap="tapBanner" src="{{item.image_url}}" class="slide-image"/>
             </swiper-item>
         </block>
     </swiper>
     <view class="dots">  
-        <block wx:for="{{product.product_images}}" wx:key="unique"> 
+        <block wx:for="{{product_images}}" wx:key="unique"> 
             <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>  
         </block>  
     </view>  
@@ -45,11 +46,7 @@
   </view>
   <view class="tab-content">
     <view class="tab-details {{ tabAction == 'details' ? 'active': '' }}">
-      <block wx:for="{{ product.product_images }}" wx:key="">
-        <view class="details">
-          <image src='{{ item.img_url }}'></image>
-        </view>
-      </block>
+      <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
       <view class="bottom">
         <span></span><text>已经到底了</text><span></span>
       </view>
@@ -88,7 +85,7 @@
         <view class="weui-panel__bd">
             <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                    <image class="weui-media-box__thumb" src="{{ product.product_images[0].img_url }}" />
+                    <image class="weui-media-box__thumb" src="{{ product_images[0].img_url }}" />
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
                     <view class="weui-media-box__title">{{ product.product_name }}</view>

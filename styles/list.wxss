@@ -23,11 +23,11 @@
   white-space: normal;
 }
 .goods-list .weui-media-box__desc {
-  font-size: 14px;
-  margin-top: 10px;
+  font-size: 12px;
+  margin-top: 15px;
 }
 .goods-list .weui-media-box__info {
-  margin-top: 22px;
+  margin-top: 38px;
   color: #999;
 }
 .goods-list .text-right {

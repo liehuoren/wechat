@@ -11,7 +11,7 @@
               <image src="/images/icon-phone.png" style="margin-right: 15px;vertical-align: middle;width:20px; height: 20px;"></image>
           </view>
           <view class="weui-cell__bd">
-              <input class="weui-input" placeholder="请输入手机号"/>
+              <input class="weui-input" bindinput="bindMobilleInput" type="number" maxlength="11" placeholder="请输入手机号"/>
           </view>
           <view class="weui-cell__ft">
               <image src="/images/icon-cross.png" style="margin-right: 10px;vertical-align: middle;width:10px; height: 10px;"></image>
@@ -22,7 +22,7 @@
               <image src="/images/icon-pass.png" style="margin-right: 15px;vertical-align: middle;width:20px; height: 20px;"></image>
           </view>
           <view class="weui-cell__bd">
-              <input class="weui-input" password="true" placeholder="请输入密码" />
+              <input class="weui-input" bindinput="bindPwdInput" password="true" placeholder="请输入密码" />
           </view>
           <view class="weui-cell__ft">
               <image src="/images/icon-cross.png" style="margin-right: 10px;vertical-align: middle;width:10px; height: 10px;"></image>

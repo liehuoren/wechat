@@ -4,15 +4,20 @@ App({
     // 展示本地存储能力
     var MID = wx.getStorageSync('MID') || ''
     var SOCKET = wx.getStorageSync('SOCKET') || ''
-    this.globalData.header = {
-      'MID': MID,
-      'SOCKET': SOCKET
+    var userInfo = wx.getStorageSync('userInfo') || ''
+    this.globalData.userInfo = JSON.parse(userInfo) || ''
+    console.log(this.globalData.userInfo)
+    if (this.globalData.userInfo) {
+      this.globalData.header.MID = this.globalData.userInfo.member_id
+      this.globalData.header.SOCKET = this.globalData.userInfo.socket
     }
   },
   globalData: {
     userInfo: null,
     header: {
-
+      'MID': '',
+      'SOCKET': '',
+      'content-type': 'application/x-www-form-urlencoded'
     }
   }
 })

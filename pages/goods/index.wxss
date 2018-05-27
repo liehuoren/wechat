@@ -1,4 +1,5 @@
 /* pages/goods/index.wxss */
+@import "/wxParse/wxParse.wxss";
 .page {
   background-color: #F4F4F4;
 }
@@ -169,6 +170,7 @@ swiper-item .slide-dec {
   height: 88rpx;
   margin: 0 auto;
   color: #fff;
+  line-height: 88rpx;
 }
 .select .weui-media-box__hd_in-appmsg {
   width: 80px;

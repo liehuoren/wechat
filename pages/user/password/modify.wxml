@@ -7,7 +7,7 @@
               <image src="/images/icon-old-pass.png" style="margin-right: 15px;vertical-align: middle;width:20px; height: 20px;"></image>
           </view>
           <view class="weui-cell__bd">
-              <input class="weui-input" password="true" placeholder="请输入旧密码" />
+              <input class="weui-input"  bindinput="pwdInput" password="true" placeholder="请输入旧密码" />
           </view>
           <view class="weui-cell__ft">
               <icon type="cancel" color="#999" size="12" style="margin-right: 15px;"></icon>
@@ -18,7 +18,7 @@
               <image src="/images/icon-pass.png" style="margin-right: 15px;vertical-align: middle;width:20px; height: 20px;"></image>
           </view>
           <view class="weui-cell__bd">
-              <input class="weui-input" password="true" placeholder="请输入新密码" />
+              <input class="weui-input" bindinput="newPwdInput" password="true" placeholder="请输入新密码" />
           </view>
           <view class="weui-cell__ft">
               <icon type="cancel" color="#999" size="12" style="margin-right: 15px;"></icon>
@@ -29,14 +29,14 @@
               <image src="/images/icon-pass.png" style="margin-right: 15px;vertical-align: middle;width:20px; height: 20px;"></image>
           </view>
           <view class="weui-cell__bd">
-              <input class="weui-input" password="true" placeholder="确认新密码" />
+              <input class="weui-input" bindinput="newPwdrInput" password="true" placeholder="确认新密码" />
           </view>
           <view class="weui-cell__ft">
               <icon type="cancel" color="#999" size="12" style="margin-right: 15px;"></icon>
           </view>
       </view>
     </view>
-    
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
     <button type="primary" bindtap="confirm">确认</button>
   </view>
 </view>

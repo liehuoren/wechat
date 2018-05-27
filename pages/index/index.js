@@ -18,16 +18,14 @@ Page({
     tabAction: "video",
     goods: {
       product_list: [
-        { product_id: '1', product_image: '/images/goods.png', product_name: '潜水艇洗衣机专用地漏卫生间淋 浴房阳台地面双排漏水器', price_range: '56.0', surplus: '999', sell_month: '999' },
-        { product_id: '2', product_image: '/images/goods.png', product_name: '潜水艇洗衣机专用地漏卫生间淋 浴房阳台地面双排漏水器', price_range: '56.0', surplus: '999', sell_month: '999' },
-        { product_id: '3', product_image: '/images/goods.png', product_name: '潜水艇洗衣机专用地漏卫生间淋 浴房阳台地面双排漏水器', price_range: '56.0', surplus: '999', sell_month: '999' },
+        
       ],
       page: {
-        showCount: 10,
-        totalPage: 2,
-        totalResult: 18,
-        currentPage: 1,
-        currentResult: 10
+        showCount: '',
+        totalPage: '',
+        totalResult: '',
+        currentPage: '',
+        currentResult: ''
       }
     },
     prompt: {
@@ -36,7 +34,17 @@ Page({
   },
   
   onLoad: function () {
-    
+    var that = this
+    http.httpPost("/app/home/top", '', {}, function (res) {
+      util.upperJSONKey(res.data)
+      util.upperListKey(res.data.banner_list)
+      that.setData({
+        banners: res.data.banner_list,
+        companyInfomation: res.data.company_infomation,
+        videoUrl: res.data.video_url
+      })
+    })
+    that.getHotproducts(1, 5)
   },
   //事件处理函数
   bindViewTap: function () {
@@ -61,23 +69,27 @@ Page({
     })
   },
   more () {
-    
+    if (this.data.goods.page.currentPage < this.data.goods.page.totalPage) {
+      var nextPage = this.data.goods.page.currentPage + 1
+      this.getHotproducts(nextPage, this.data.goods.page.showCount)
+    }
   },
   goodDetails (e) {
+    console.log(e)
     wx.navigateTo({
-      url: '/pages/goods/index',
+      url: '/pages/goods/index?id=' + e.currentTarget.dataset.id,
     })
   },
-  onLaunch: function () {
+  getHotproducts(currentPage, showCount) {
     var that = this
-    http.httpPost("/app/home/top", '', {}, function (res) {
+    http.httpPost("/app/home/hotproducts", { currentPage: currentPage, showCount: showCount}, {}, function (res) {
       util.upperJSONKey(res.data)
-      util.upperListKey(res.data.banner_list)
-      console.log(res.data.banner_list)
+      util.upperListKey(res.data.hot_project_list)
+      var product_list = that.data.goods.product_list.concat(res.data.hot_project_list)
+      var page = res.data.page
+      var goods = { product_list, page }
       that.setData({
-        banners: res.data.banner_list,
-        companyInfomation: res.data.company_infomation,
-        videoUrl: res.data.video_url
+        goods: goods
       })
     })
   }
