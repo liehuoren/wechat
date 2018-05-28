@@ -46,7 +46,7 @@ Page({
           title: '登录成功',
           icon: 'success',
           duration: 2000,
-          success () {
+          success: function () {
             wx.navigateTo({
               url: '/pages/user/user'
             })

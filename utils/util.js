@@ -13,7 +13,15 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
-
+function lowerJSONKey(jsonObj) {
+  for (var key in jsonObj) {
+    if (/^[a-z]+|_$/.test(key)) {
+      jsonObj[key.toUpperCase()] = jsonObj[key];
+      delete (jsonObj[key]);
+    }
+  }
+  return jsonObj;
+};
 function upperJSONKey(jsonObj) {
   for (var key in jsonObj) {
     if (/^[A-Z]+|_$/.test(key)) {
@@ -32,5 +40,6 @@ function upperListKey(list) {
 module.exports = {
   formatTime: formatTime,
   upperJSONKey: upperJSONKey,
-  upperListKey: upperListKey
+  upperListKey: upperListKey,
+  lowerJSONKey: lowerJSONKey
 }

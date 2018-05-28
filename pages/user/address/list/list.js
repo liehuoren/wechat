@@ -1,13 +1,17 @@
 // pages/user/address/list/list.js
+
+var http = require('/../../../../utils/http.js')
+var util = require('/../../../../utils/util.js')
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    address: {
-      
-    }
+    address: [
+
+    ]
   },
   add() {
     wx.navigateTo({
@@ -36,11 +40,52 @@ Page({
       }
     });
   },
+  checkDefault(e) {
+    var address = this.data.address
+    for(var item of address) {
+      if (e.currentTarget.dataset.id == item.address_id) {
+        if (item.is_default == 0) {
+          item.is_default = 1
+          this.updateAddress(item)
+        }
+      } else {
+        if(item.is_default == 1) {
+          item.is_default = 0
+          this.updateAddress(item)
+        }
+      }
+      util.upperJSONKey(item)
+    }
+    this.setData({
+      address: address
+    })
+    console.log(this.data.address)
+  },
+  updateAddress (address) {
+    var data = util.lowerJSONKey(address)
+    http.httpPost('/app/user/address/edit',data,{},function(res){
+      if(res.code == '000000') {
+
+      }
+    })
+  }, 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
+    http.httpPost('/app/user/address/list','',{},function(res){
+      if (res.code == '000000') {
+        // util.upperJSONKey(res.data)
+        util.upperListKey(res.data)
+        console.log(res.data)
+        that.setData({
+          address: res.data
+        })
+      } else {
 
+      }
+    })
   },
 
   /**

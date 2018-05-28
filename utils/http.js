@@ -1,4 +1,4 @@
-var root = 'https://smallapi.ittun.com';
+var root = 'http://smallapi.capsui.com'
 var app = getApp()
 function Get(url, data, header, cb) {
   wx.showNavigationBarLoading();
