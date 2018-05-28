@@ -7,7 +7,7 @@
                 <view class="weui-label">收货人</view>
             </view>
             <view class="weui-cell__bd">
-                <input name="name" class="weui-input" type="text" placeholder="" />
+                <input name="take_by" value="{{address.take_by}}" class="weui-input" type="text" placeholder="" />
             </view>
         </view>
         
@@ -16,7 +16,7 @@
                 <view class="weui-label">联系电话</view>
             </view>
             <view class="weui-cell__bd">
-                <input name="tel" class="weui-input" type="tel" placeholder="" />
+                <input name="tel" value="{{address.tel}}" class="weui-input" type="tel" placeholder="" />
             </view>
         </view>
         <view class="weui-cell weui-cell_select">
@@ -24,8 +24,20 @@
                 <view class="weui-label">所在地区</view>
             </view>
             <view class="weui-cell__bd">
-                <picker  mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
-                    <view class="weui-select weui-select_in-select-after">{{region[0]}}，{{region[1]}}，{{region[2]}}</view>
+                <picker name="provinc_id" value="{{selProvince.id}}" bindchange="bindPickerProvinceChange" range="{{provinces}}" range-key='areaname'>
+                  <view class="picker {{selProvince=='请选择'?'hui':''}}">
+                    {{selProvince.areaname || '请选择'}}
+                  </view>
+                </picker>
+                <picker name="city_id" value="{{selCity.id}}" bindchange="bindPickerCityChange" range="{{citys}}" range-key='areaname'>
+                  <view class="picker {{selCity=='请选择'?'hui':''}}">
+                    {{selCity.areaname || '请选择'}}
+                  </view>
+                </picker>
+                <picker name="county_id" value="{{selDistrict.id}}" bindchange="bindPickerChange" range="{{districts}}" range-key='areaname'>
+                  <view class="picker {{selDistrict=='请选择'?'hui':''}}">
+                    {{selDistrict.areaname || '请选择'}}
+                  </view>
                 </picker>
             </view>
         </view>
@@ -34,13 +46,13 @@
                 <view class="weui-label">详细地址</view>
             </view>
             <view class="weui-cell__bd">
-                <textarea name="address" class="weui-textarea" placeholder="请输入详细地址信息，如道路、门牌号、小区、 楼栋号、单元室等" style="height: 4em" />
+                <textarea name="address" class="weui-textarea" placeholder="请输入详细地址信息，如道路、门牌号、小区、 楼栋号、单元室等" style="height: 4em" value='{{address.address}}' />
             </view>
         </view>
         <view class="weui-cell weui-cell_switch">
             <view class="weui-cell__bd">设为默认</view>
             <view class="weui-cell__ft">
-                <switch name="is_def" color="#ffaa2b" />
+                <switch name="is_default" checked="{{address.is_default}}" color="#ffaa2b" />
             </view>
         </view>
     </view>

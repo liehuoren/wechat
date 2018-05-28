@@ -17,7 +17,7 @@
               </view>
               <view class="weui-media-box__info__meta text-orangered">默认地址</view>
               <view class="right">
-                <view class="weui-media-box__info__meta text-orangered tool" bindtap="edit">
+                <view class="weui-media-box__info__meta text-orangered tool" data-index="{{index}}" bindtap="edit">
                   <image src="/images/icon-edit.png" class="icon"></image>
                   <text>编辑</text>
                 </view>

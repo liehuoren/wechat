@@ -38,4 +38,10 @@
 .weui-cell__hd .weui-label {
   width: 85px;
 }
-
+picker {
+  min-width: 20rpx;
+  height: 80rpx;
+  margin-right: 20rpx;
+  float:left;
+  line-height:80rpx;
+}

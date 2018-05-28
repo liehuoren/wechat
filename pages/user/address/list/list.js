@@ -18,9 +18,11 @@ Page({
       url: '/pages/user/address/add/add'
     })
   },
-  edit(num) {
+  edit(e) {
+    var index = e.currentTarget.dataset.index
+    var address = JSON.stringify(this.data.address[index])
     wx.navigateTo({
-      url: '/pages/user/address/edit/edit'
+      url: '/pages/user/address/edit/edit?address=' + address
     })
   },
   delete(num) {
