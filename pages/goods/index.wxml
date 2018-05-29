@@ -52,23 +52,25 @@
       </view>
     </view>
     <view class="tab-parameter {{ tabAction == 'parameter' ? 'active': '' }}">
-      <view class="weui-cells weui-cells_after-title specification-select">
-        <view class="weui-cell">
-            <view class="weui-cell__hd"><view class="weui-label">型号</view></view>
-            <view class="weui-cell__bd">G20珍珠白</view>
+      <block wx:for="{{product_params}}" wx:key="param_id">
+        <view class="weui-cells weui-cells_after-title parameter">
+          <view class="weui-cell">
+              <view class="weui-cell__hd"><view class="weui-label">型号</view></view>
+              <view class="weui-cell__bd">{{item.param_type_name}}</view>
+          </view>
+          <view class="weui-cell">
+              <view class="weui-cell__hd"><view class="weui-label">品牌</view></view>
+              <view class="weui-cell__bd">{{item.param_brand_name}} {{param_remark}}</view>
+          </view>
         </view>
-        <view class="weui-cell">
-            <view class="weui-cell__hd"><view class="weui-label">品牌</view></view>
-            <view class="weui-cell__bd">BULL/公牛 两开双控</view>
-        </view>
-      </view>
+      </block>
     </view>
   </view>
 </view>
 
 <view class="footer">
    <view class="add">
-    <view class="add-left">
+    <view class="add-left" bindtap='goCart'>
       <image src="/images/add-cart.png"></image>
       <text>进货单</text>
     </view>
@@ -85,16 +87,16 @@
         <view class="weui-panel__bd">
             <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                    <image class="weui-media-box__thumb" src="{{ product_images[0].img_url }}" />
+                    <image class="weui-media-box__thumb" src="{{ product_images[0].image_url }}" />
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                    <view class="weui-media-box__title">{{ product.product_name }}</view>
+                    <view class="weui-media-box__title">{{ selectSpecification?selectSpecification.specification_name:product.product_name }}</view>
                     <view class="weui-media-box__desc price">
-                      ￥{{ product.price_range }}
+                      ￥{{ selectSpecification?selectSpecification.specification_price:product.price_range }}
                     </view>
                     <view class="weui-media-box__info text-right">
-                      <view class="weui-media-box__info__meta">库存：{{ product.surplus }}</view>
-                      <view class="weui-media-box__info__meta">月销：{{ product.sell_month }}件</view>
+                      <view class="weui-media-box__info__meta">库存：{{ selectSpecification?selectSpecification.specification_total:product.surplus }}</view>
+                      <view class="weui-media-box__info__meta">月销：{{ selectSpecification?selectSpecification.specification_sell_month:product.sell_month }}件</view>
                     </view>
                 </view>
             </view>
@@ -103,22 +105,13 @@
     <view class="weui-panel">
       <view class="weui-panel__hd">规格</view>
           <view class="weui-panel__bd">
+            <block wx:for="{{product_specifications.length/2}}" wx:for-index="idx" wx:key="*this">
               <view class="weui-flex">
-                  <view class="weui-flex__item"><view class="placeholder active">型号：G20珍珠白</view></view>
-                  <view class="weui-flex__item"><view class="placeholder">型号：G20珍珠白</view></view>
+                <block wx:for="{{product_specifications}}" wx:key="specification_id" wx:if="{{index/2 >= idx && index/2 < idx+1}}">
+                  <view class="weui-flex__item" data-index="{{index}}" bindtap='selectSpecification'><view class="placeholder {{item.specification_id==selectSpecification.specification_id?'active':''}}">型号：{{item.specification_name}}</view></view>
+                </block>
               </view>
-              <view class="weui-flex">
-                  <view class="weui-flex__item"><view class="placeholder">型号：G20珍珠白</view></view>
-                  <view class="weui-flex__item"><view class="placeholder">型号：G20珍珠白</view></view>
-              </view>
-              <view class="weui-flex">
-                  <view class="weui-flex__item"><view class="placeholder">型号：G20珍珠白</view></view>
-                  <view class="weui-flex__item"><view class="placeholder">型号：G20珍珠白</view></view>
-              </view>
-              <view class="weui-flex">
-                  <view class="weui-flex__item"><view class="placeholder">型号：G20珍珠白</view></view>
-                  <view class="weui-flex__item"><view class="placeholder">型号：G20珍珠白</view></view>
-              </view>
+            </block>
           </view>
     </view>
     <view class="weui-cells weui-cells_after-title">
@@ -136,7 +129,7 @@
         </view>
     </view>
     <view class="select-button">
-      <button class="add-button">加入进货单</button>
+      <button class="add-button" bindtap="addCart">加入进货单</button>
     </view>
   </view>
 </view>

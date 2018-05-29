@@ -1,4 +1,8 @@
 // pages/cart/index.js
+var http = require('/../../utils/http.js')
+var util = require('/../../utils/util.js')
+var WxParse = require('../../wxParse/wxParse.js');
+
 Page({
 
   /**
@@ -17,30 +21,34 @@ Page({
         },
       ],
     },
-    carts: {
-      items: [
-        { id: 1, goods: { name: '潜水艇洗衣机专用地漏卫生间淋 浴房阳台地面双排漏水器', price: '56.0', thumb_url: '/images/goods.png' }, total: 10, amount: 56, totalAmount: 560},
-        { id: 2, thumb_url: '/images/goods.png', goods: { name: '潜水艇洗衣机专用地漏卫生间淋 浴房阳台地面双排漏水器', price: '56.0', thumb_url: '/images/goods.png' }, total: 10, amount: 56, totalAmount: 560 }
-      ]
-    },
     shoppingcart_list: [
-      { product_image: '/images/goods1.png', product_id: 1, product_name: '浴房阳台地面双排漏水器', price: '56.0', specification_name: 'G20珍珠白', amount: 15, shoppingcart_id: 1 },
-      { product_image: '/images/goods2.png', product_id: 2, product_name: '浴房阳台地面双排漏水器', price: '56.0', specification_name: 'G20珍珠白', amount: 10, shoppingcart_id: 2 },
-      { product_image: '/images/goods3.png', product_id: 3, product_name: '浴房阳台地面双排漏水器', price: '56.0', specification_name: 'G20珍珠白', amount: 1, shoppingcart_id: 3 },
+      
     ],
     canEdit: false,
     buyNumber: '',
-    buyNumMax: 1000,
+    buyNumMax: 10000,
     buyNumMin: 1,
     checkedAll: false,
-    allPrice: 0
+    allPrice: 0,
+    page:{
+      showCount: 10,
+      totalPage: '',
+      totalResult: '',
+      currentPage: '',
+      currentResult: ''
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this
+    var data = {
+      currentPage: 1,
+      showCount: 10
+    }
+    this.getCarts(1, this.data.page.showCount)
   },
   goShop () {
     wx.navigateTo({
@@ -50,7 +58,7 @@ Page({
   numJianTap: function (e) {
     var checkboxItems = this.data.shoppingcart_list, value = e.currentTarget.dataset.id;
     for (var i = 0, lenI = checkboxItems.length; i < lenI; ++i) {
-      if (checkboxItems[i].product_id == value) {
+      if (checkboxItems[i].shoppingcart_id == value) {
         if (checkboxItems[i].amount > this.data.buyNumMin) {
           checkboxItems[i].amount--;
           this.setData({
@@ -60,14 +68,15 @@ Page({
         break;
       }
     }
+    this.saveChange()
   },
   numJiaTap: function (e) {
-    console.log(e.currentTarget.dataset.id)
     var checkboxItems = this.data.shoppingcart_list, value = e.currentTarget.dataset.id;
     for (var i = 0, lenI = checkboxItems.length; i < lenI; ++i) {
-      if (checkboxItems[i].product_id == value) {
+      if (checkboxItems[i].shoppingcart_id == value) {
         if (checkboxItems[i].amount < this.data.buyNumMax) {
           checkboxItems[i].amount++;
+          this.amountChange(checkboxItems[i].shoppingcart_id, checkboxItems[i].amount)
           this.setData({
             shoppingcart_list: checkboxItems
           })
@@ -75,16 +84,17 @@ Page({
         break;
       }
     }
+    this.saveChange()
     
   },
   checkboxChange: function (e) {
-
+    console.log(e)
     var checkboxItems = this.data.shoppingcart_list, values = e.detail.value;
     for (var i = 0, lenI = checkboxItems.length; i < lenI; ++i) {
       checkboxItems[i].checked = false;
 
       for (var j = 0, lenJ = values.length; j < lenJ; ++j) {
-        if (checkboxItems[i].product_id == values[j]) {
+        if (checkboxItems[i].shoppingcart_id == values[j]) {
           checkboxItems[i].checked = true;
           break;
         }
@@ -93,6 +103,7 @@ Page({
     this.setData({
       shoppingcart_list: checkboxItems
     });
+    this.saveChange()
   },
   checkAll () {
     if (this.data.checkedAll) {
@@ -118,6 +129,108 @@ Page({
         allPrice: prices
       });
     }
+  },
+  delete(e) {
+    var that = this
+    var index = e.currentTarget.dataset.index
+    var SHOPPINGCART_ID = that.data.shoppingcart_list[index].shoppingcart_id
+    wx.showModal({
+      title: '提示',
+      content: '确认删除',
+      confirmText: "确认",
+      cancelText: "取消",
+      confirmColor: '#ff9f10',
+      success: function (res) {
+        console.log(res);
+        if (res.confirm) {
+          http.httpPost('/app/shoppingcart/del/id', {
+            SHOPPINGCART_ID: SHOPPINGCART_ID},{},function(ress){
+              if(ress.code == '000000') {
+                that.data.shoppingcart_list.splice(index,1)
+                that.setData({
+                  shoppingcart_list: that.data.shoppingcart_list
+                })
+                that.saveChange()
+              }
+            })
+        } else {
+          console.log('用户点击辅助操作')
+        }
+      }
+    });
+  },
+  saveChange() {
+    if (this.data.shoppingcart_list.length == 0) {
+      this.data.prompt.hidden = 0
+      this.setData({
+        prompt: this.data.prompt
+      })
+    } else {
+      var checkboxItems = this.data.shoppingcart_list;
+      var prices = 0;
+      for (var i = 0, lenI = checkboxItems.length; i < lenI; ++i) {
+        if (checkboxItems[i].checked) {
+          prices += checkboxItems[i].price * checkboxItems[i].amount
+        }
+      }
+      this.setData({
+        allPrice: prices
+      });
+    }
+  },
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+    if (this.data.page.currentPage < this.data.page.totalPage) {
+      var nextPage = this.data.page.currentPage + 1
+      this.getCarts(nextPage, this.data.page.showCount)
+    }
+  },
+  getCarts(currentPage, showCount) {
+    var that = this
+    http.httpPost("/app/shoppingcart/list", { currentPage: currentPage, showCount: showCount }, {}, function (res) {
+      if(res.code == '000000') {
+        util.upperJSONKey(res.data)
+        util.upperListKey(res.data.shoppingcart_list)
+        var shoppingcart_list = that.data.shoppingcart_list.concat(res.data.shoppingcart_list)
+        var page = res.data.page
+        that.setData({
+          shoppingcart_list: shoppingcart_list,
+          page: page
+        })
+        
+      }
+      that.saveChange()
+    })
+  },
+  amountChange(id, amount) {
+    http.httpPost('/app/shoppingcart/edit/id', { SHOPPINGCART_ID: id, AMOUNT: amount},{},function(res){
+      
+    })
+  },
+  toOrder() {
+    wx.showLoading();
+    if (this.data.shoppingcart_list.length == 0) {
+      wx.hideLoading();
+      return;
+    }
+    var checkboxItems = this.data.shoppingcart_list;
+    var checked = [];
+    for (var i = 0, lenI = checkboxItems.length; i < lenI; ++i) {
+      if (checkboxItems[i].checked) {
+        checked.push(checkboxItems[i])
+      }
+    }
+    wx.setStorage({
+      key: "cart",
+      data: checked
+    })
+    
+    wx.navigateTo({
+      url: '/pages/order/create/index'
+    })
+    wx.hideLoading();
   }
 
 })

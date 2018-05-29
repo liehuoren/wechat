@@ -1,0 +1,7 @@
+/* pages/order/datail/detail.wxss */
+.price {
+  color: #ffaa2b;
+}
+.text-right {
+  float: right
+}

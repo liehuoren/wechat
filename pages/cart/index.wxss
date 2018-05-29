@@ -36,6 +36,7 @@ page{
   border: 1px solid #eee;
 }
 .num-box .num-input{
+  width: 70rpx;
   font-size: 28rpx;
 }
 .num-box .num-input input{
@@ -43,16 +44,21 @@ page{
 }
 .cart {
   display: flex;
+  width: 100%;
 }
 .cart .weui-cell, .cart .weui-panel__bd {
   display: flex;
+  width: 78%;
 }
 .cart .weui-media-box__hd_in-appmsg {
-  width: 80px;
+  width: 35%;
+  max-width: 80px;
   height: 80px;
+  margin-right:.4em;
 }
 .cart .weui-media-box {
   padding: 15px 5px;
+  width: 98%;
 }
 .right {
   width: 50px;
@@ -76,6 +82,7 @@ page{
   align-items:center;
   -webkit-justify-content:center;
   justify-content:center;
+  background-color: #fff;
 }
 .footer .check {
   width: 20%;
@@ -87,7 +94,7 @@ page{
   justify-content:center;
 }
 .footer .heji {
-  width: 50%;
+  width: 60%;
   height: 100%;
   display: flex;
   -webkit-align-items:center;
@@ -108,7 +115,18 @@ page{
 }
 .price {
   color: #ffaa2b;
+  font-size: 16px;
+  line-height: 30px;
+}
+.text-right {
+  float: right;
+  padding-right:0;
 }
 .footer .price {
   font-size: 18px;
+}
+.check {
+  padding: 0;
+  width:10%;
+  max-width:38px;
 }

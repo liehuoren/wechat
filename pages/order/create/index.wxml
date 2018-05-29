@@ -1,0 +1,45 @@
+<!--pages/order/create/index.wxml-->
+<view class="page">
+<view class="address-box">
+  <view class="add-address" wx:if="{{address == null}}">
+      <view class="title" bindtap="addAddress">新增收货地址</view>
+  </view>
+  <view class="show-address" wx-else bindtap="selectAddress">
+      <view class="name-tel">{{address.take_by}}  {{address.tel}}</view>
+      <view class="addr-text">{{address.showcitypicker}}{{address.address}}</view>
+  </view>
+</view>
+<view class="goods-list">
+  <view class="weui-panel weui-panel_access" wx:if="{{ !!goods.length }}" wx:for="{{ goods }}" wx:key="shoppingcart_id">
+    <view class="weui-panel__bd" style="flex-shrink:1">
+        <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" data-id="{{ item.shoppingcart_id }}">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                <image class="weui-media-box__thumb" src="{{ item.product_image }}" />
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__title">{{ item.product_name }}</view>
+                <view class="weui-media-box__desc">
+                    选择型号：{{ item.specification_name }}
+                </view>
+                <view class="weui-media-box__info">
+                  <view class="weui-media-box__info__meta price">￥{{ item.price }}</view>
+                  <view class="weui-media-box__info__meta text-right">
+                    x{{ item.amount }}
+                  </view>
+                </view>
+            </view>
+        </view>
+    </view>
+  </view>
+</view>
+
+
+<view class="footer">
+  <view class="heji">
+    合计： <label class="price">￥{{ totalPrice }}</label>
+  </view>
+  <view class="jiesuan" bindtap='saveOrder'>
+    提交订单
+  </view>
+</view>
+</view>

@@ -19,15 +19,18 @@
   </view>
   <view class="classify">
 	<view class="nav_left" bindscrolltolower="getMore" bindscrolltoupper="onRefresh">
-		<scroll-view scroll-y="true" style="height: {{ deviceHeight + 'px' }}">
-      		<view bindtap="changeTab" data-index="{{ index }}" data-id="{{ item.id }}" class="nav_left_item {{ activeIndex === index ? 'active' : '' }}" wx:for="{{ classify }}" wx:key="">
-      			{{ item.name }}
-      		</view>
-   		 </scroll-view>
+		<scroll-view scroll-y="true" style="height: 100%;">
+        <view bindtap="changeTab" data-index="-1" class="nav_left_item {{ selectPro === '-1' ? 'active' : '' }}">
+          全部
+        </view>
+        <view bindtap="changeTab" data-index="{{ index }}" data-id="{{ item.id }}" class="nav_left_item {{ selectPro === index ? 'active' : '' }}" wx:for="{{ pro_type }}" wx:key="name">
+          {{ item.name }}
+        </view>
+      </scroll-view>
 	</view>
 	<view class="nav_right">
 		<view class="content">
-			<scroll-view scroll-y="true" style="height: {{ (deviceHeight - 49) + 'px' }}" bindscrolltolower="getMoreGoods" bindscrolltoupper="onRefreshGoods">
+			<scroll-view scroll-y="true" style="height: {{ (deviceHeight + 50) + 'px' }}" bindscrolltolower="getMoreGoods" bindscrolltoupper="onRefreshGoods">
 				<template is="list" data="{{ goods, prompt }}"/>
 			</scroll-view>
 		</view>
@@ -35,11 +38,6 @@
 </view>
 
 </view>
-<view class="select" bindtap='select'>
+<view class="select" bindtap='selectPing'>
   <image src="/images/select.png"></image>
 </view>
-<picker-view indicator-class="select-indicator" mask-class="select-mask" value="{{value}}" bindchange="selectValue">
-  <picker-view-column>
-      <view wx:for="{{classify}}" style="line-height: 50px">{{ item.name }}</view>
-    </picker-view-column>
-</picker-view>

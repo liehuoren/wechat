@@ -11,7 +11,8 @@ Page({
   data: {
     address: [
 
-    ]
+    ],
+    select: false
   },
   add() {
     wx.navigateTo({
@@ -25,17 +26,30 @@ Page({
       url: '/pages/user/address/edit/edit?address=' + address
     })
   },
-  delete(num) {
+  delete(e) {
+    var that = this
+    var index = e.currentTarget.dataset.index
+    var ADDRESS_ID = that.data.address[index].address_id
     wx.showModal({
-      title: '删除地址',
-      content: '确认删除地址？',
+      title: '提示',
+      content: '确认删除',
       confirmText: "确认",
-      confirmColor: "#ffaa2b",
-      cancelText: "返回",
+      cancelText: "取消",
+      confirmColor: '#ff9f10',
       success: function (res) {
         console.log(res);
         if (res.confirm) {
-          console.log('用户点击主操作')
+          http.httpPost('/app/user/address/del', {
+            ADDRESS_ID: ADDRESS_ID
+          }, {}, function (ress) {
+            if (ress.code == '000000') {
+              that.data.address.splice(index, 1)
+              that.setData({
+                address: that.data.address
+              })
+              that.saveChange()
+            }
+          })
         } else {
           console.log('用户点击辅助操作')
         }
@@ -84,58 +98,27 @@ Page({
         that.setData({
           address: res.data
         })
-      } else {
-
       }
     })
+    if(options.select) {
+      this.setData({
+        select: true
+      })
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  select(e){
+    if(this.data.select) {
+      var address = this.data.address
+      for (var item of address) {
+        if (e.currentTarget.dataset.id == item.address_id) {
+          if (item.is_default == 0) {
+            item.is_default = 1
+            this.updateAddress(item)
+            wx.navigateBack({})
+          }
+        }
+      }
+    }
+    
   }
 })

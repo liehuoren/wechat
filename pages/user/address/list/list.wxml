@@ -2,7 +2,7 @@
 <view class="address-list">
   <view class="scroll-list" wx:if="{{ address.length }}">
     <block wx:for="{{address}}" wx:key="address_id">
-      <view class="weui-panel" data-id="{{item.address_id}}">
+      <view class="weui-panel" data-id="{{item.address_id}}" bindtap='select'>
         <view class="weui-panel__bd">
           <view class="weui-media-box weui-media-box_text" >
             <view class="weui-media-box__title weui-media-box__title_in-text">
@@ -21,7 +21,7 @@
                   <image src="/images/icon-edit.png" class="icon"></image>
                   <text>编辑</text>
                 </view>
-                <view class="weui-media-box__info__meta text-orangered tool" bindtap="delete">
+                <view class="weui-media-box__info__meta text-orangered tool" data-index="{{index}}" bindtap="delete">
                   <image src="/images/icon-del.png" class="icon"></image>
                   <text>删除</text>
                 </view>

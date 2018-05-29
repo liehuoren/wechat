@@ -46,12 +46,13 @@ Page({
           title: '登录成功',
           icon: 'success',
           duration: 2000,
-          success: function () {
-            wx.navigateTo({
-              url: '/pages/user/user'
+          success: function (res) {
+            wx.switchTab({
+              url: '/pages/index/index'
             })
           }
         });
+        
       } else {
         wx.showToast({
           title: '密码或账号错误',

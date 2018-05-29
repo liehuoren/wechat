@@ -1,19 +1,19 @@
 <!--pages/cart/index.wxml-->
- <import src="../common/prompt.wxml"/>
+<import src="../common/prompt.wxml"/>
 
 <template is="prompt" data="{{ prompt }}"/>
 
-<checkbox-group bindchange="checkboxChange">
-<view class="weui-panel weui-panel_access cart" wx:if="{{ !!shoppingcart_list.length }}" wx:for="{{ shoppingcart_list }}" wx:key="value">
-    <label class="weui-cell weui-check__label">
-      <checkbox class="weui-check" value="{{item.product_id}}" checked="{{item.checked}}"/>
-      <view class="weui-cell__hd weui-check__hd_in-checkbox">
-          <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
-          <icon class="weui-icon-checkbox_success" type="success" color="#ffaa2b" size="23" wx:if="{{item.checked}}"></icon>
-      </view>
-    </label>
-  <view class="weui-panel__bd">
-      <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" data-id="{{ item.product_id }}">
+<checkbox-group bindchange="checkboxChange" style="margin-bottom:100rpx">
+<view class="weui-panel weui-panel_access cart" wx:if="{{ !!shoppingcart_list.length }}" wx:for="{{ shoppingcart_list }}" wx:key="shoppingcart_id">
+  <label class="weui-cell weui-check__label check" style="flex-shrink:1">
+    <checkbox class="weui-check" value="{{item.shoppingcart_id}}" checked="{{item.checked}}"/>
+    <view class="weui-cell__hd weui-check__hd_in-checkbox">
+        <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+        <icon class="weui-icon-checkbox_success" type="success" color="#ffaa2b" size="23" wx:else></icon>
+    </view>
+  </label>
+  <view class="weui-panel__bd" style="flex-shrink:1">
+      <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" data-id="{{ item.shoppingcart_id }}">
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
               <image class="weui-media-box__thumb" src="{{ item.product_image }}" />
           </view>
@@ -26,18 +26,18 @@
                 <view class="weui-media-box__info__meta price">￥{{ item.price }}</view>
                 <view class="weui-media-box__info__meta text-right">
                   <view class="num-box">
-                    <view class="num-jian {{buyNumber == buyNumMin ? 'hui': ''}}" data-id="{{ item.product_id }}" bindtap="numJianTap">-</view>
+                    <view class="num-jian {{buyNumber == buyNumMin ? 'hui': ''}}" data-id="{{ item.shoppingcart_id }}" bindtap="numJianTap">-</view>
                     <view class="num-input">
                        <input  type="number" value="{{ item.amount }}" disabled/>
                     </view>
-                    <view class="num-jia {{buyNumber== buyNumMax ? 'hui': ''}}" data-id="{{ item.product_id }}"  bindtap="numJiaTap">+</view>
+                    <view class="num-jia {{buyNumber== buyNumMax ? 'hui': ''}}" data-id="{{ item.shoppingcart_id }}"  bindtap="numJiaTap">+</view>
                   </view>
                 </view>
               </view>
           </view>
       </view>
   </view>
-  <view class="right">
+  <view class="right" style="flex-shrink:1" bindtap='delete' data-index="{{ index }}">
       <image src="/images/cart-del.png"></image>
   </view>
 </view>
@@ -49,9 +49,9 @@
       <icon class="weui-icon-checkbox_success" type="success" color="#ffaa2b" size="23" wx:if="{{checkedAll}}"></icon>
   </view>
   <view class="heji">
-    合计： <label class="price">{{ allPrice }}</label>
+    合计： <label class="price">￥{{ allPrice }}</label>
   </view>
-  <view class="jiesuan">
+  <view class="jiesuan" bindtap='toOrder'>
     结算
   </view>
 </view>

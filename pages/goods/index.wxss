@@ -177,11 +177,10 @@ swiper-item .slide-dec {
   height: 80px;
 }
 .weui-panel .weui-flex {
-  width: 80%;
+  width: 85%;
   margin: 0 auto;
 }
 .weui-panel .weui-flex__item {
-  
   text-align: center;
 }
 
@@ -194,6 +193,7 @@ swiper-item .slide-dec {
   height:2.1em;
   line-height:2.1em;
   color:#cfcfcf;
+  font-size: 15px;
 }
 .weui-panel .placeholder.active {
   color: #fff;
@@ -254,4 +254,7 @@ swiper-item .slide-dec {
   width:100%;
   background-color: #fff;
   z-index: 6;
+}
+.parameter {
+  margin-top: 5px;
 }

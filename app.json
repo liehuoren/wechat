@@ -12,7 +12,9 @@
     "pages/search/index",
     "pages/order/list/list",
     "pages/cart/index",
-    "pages/goods/index"
+    "pages/goods/index",
+    "pages/order/create/index",
+    "pages/order/datail/detail"
   ],
   "window": {
     "backgroundTextStyle": "light",

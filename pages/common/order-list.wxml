@@ -1,23 +1,23 @@
 <template name="order-list">
   <view class="scroll-list">
-    <view class="weui-form-preview" wx:if="{{ !!order.page.total }}" wx:for="{{ order.items }}" wx:key="" bindtap="navigatorTo" data-id="{{ item.id }}">
+    <view class="weui-form-preview" wx:if="{{ true }}" wx:for="{{ order.order_list}}" wx:key="" data-id="{{ item.order_id}}">
       <view class="weui-panel weui-panel_access">
           <view class="weui-panel__hd">
             <text>下单时间:{{ item.createtime }}</text>
             <text class="text-right action">{{ item.active }}</text>
           </view>
           <view class="weui-panel__bd">
-              <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+              <navigator url="/pages/order/datail/detail?order_id={{item.order_id}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
                   <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                      <image class="weui-media-box__thumb" src="{{ item.image_url }}" />
+                      <image class="weui-media-box__thumb" src="{{ item.detail_list[0].product_image }}" />
                   </view>
                   <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                      <view class="weui-media-box__title">{{ item.title }}</view>
-                      <view class="weui-media-box__desc">用户名称：{{ item.name }}</view>
+                      <view class="weui-media-box__title">{{ item.detail_list[0].product_name }}</view>
+                      <view class="weui-media-box__desc">用户名称：{{ item.take_by }}</view>
                       <view class="weui-media-box__info">
                         <view class="text-right">
-                          <view class="weui-media-box__info__meta">共{{item.total}}件商品</view>
-                            <view class="weui-media-box__info__meta">合计:￥{{ item.total_price }}</view>
+                          <view class="weui-media-box__info__meta">共{{item.detail_list.length}}件商品</view>
+                            <view class="weui-media-box__info__meta">合计:￥{{ item.real_price }}</view>
                         </view>
                       </view>
                   </view>

@@ -1,4 +1,7 @@
 // pages/order/list/list.js
+var http = require('/../../../utils/http.js')
+var util = require('/../../../utils/util.js')
+
 Page({
 
   /**
@@ -8,20 +11,37 @@ Page({
     activeIndex: 0,
     navList: [],
     order: {
-      items: [
-        { id: 1, active: '已下单', createtime: '2018-3-25 11:30', image_url: '/images/goods.png', title: '公牛开关插座86型暗装饰墙壁电源 面板三五孔电脑墙壁电源插座面板', name: '小张五金的客户', total: '1', total_price: '56', address: '上海市杨浦区昆明路518号北美广场A座1020室'},
-        { id: 2, active: '已配送', createtime: '2018-3-25 11:30', image_url: '/images/goods.png', title: '公牛开关插座86型暗装饰墙壁电源 面板三五孔电脑墙壁电源插座面板', name: '小张五金的客户', total: '2', total_price: '112', address: '上海市杨浦区昆明路518号北美广场A座1020室' }
+      order_list: [
+        
       ],
       page: {
-        total: 1
+
       }
     },
     prompt: {
       hidden: !0,
-      icon: '../../../images/iconfont-order-default.png',
+      icon: '../../../images/cart-empty.png',
       title: '您还没有相关的订单',
       text: '可以去看看有哪些想买的',
     },
+    navList: [
+      {
+        name: '全部',
+        _id: 'all',
+      },
+      {
+        name: '已下单',
+        _id: 'submitted',
+      },
+      {
+        name: '已配送',
+        _id: 'confirmed',
+      },
+      {
+        name: '已结算',
+        _id: 'finished',
+      }
+    ]
   },
 
   /**
@@ -29,78 +49,50 @@ Page({
    */
   onLoad: function (options) {
     // wx.hideTabBar();
-    this.setData({
-      navList: [
-        {
-          name: '全部',
-          _id: 'all',
-        },
-        {
-          name: '已下单',
-          _id: 'submitted',
-        },
-        {
-          name: '已配送',
-          _id: 'confirmed',
-        },
-        {
-          name: '已结算',
-          _id: 'finished',
-        }
-      ]
-    })
+    this.getOrderList(1, 10)
   },
   onTapTag(e) {
-    if (e.currentTarget.dataset.index == 3) {
-      this.setData({
-        activeIndex: e.currentTarget.dataset.index,
-        order: {
-          items: [
-            
-          ],
-          page: {
-            total: 0
-          }
-        },
-      })
-    } else if (e.currentTarget.dataset.index == 2) {
-      this.setData({
-        activeIndex: e.currentTarget.dataset.index,
-        order: {
-          items: [
-            { id: 2, active: '已配送', createtime: '2018-3-25 11:30', image_url: '/images/goods.png', title: '公牛开关插座86型暗装饰墙壁电源 面板三五孔电脑墙壁电源插座面板', name: '小张五金的客户', total: '2', total_price: '112', address: '上海市杨浦区昆明路518号北美广场A座1020室' }
-          ],
-          page: {
-            total: 1
-          }
-        },
-      })
-    } else if (e.currentTarget.dataset.index == 1) {
-      this.setData({
-        activeIndex: e.currentTarget.dataset.index,
-        order: {
-          items: [
-            { id: 2, active: '已下单', createtime: '2018-3-25 11:30', image_url: '/images/goods.png', title: '公牛开关插座86型暗装饰墙壁电源 面板三五孔电脑墙壁电源插座面板', name: '小张五金的客户', total: '2', total_price: '112', address: '上海市杨浦区昆明路518号北美广场A座1020室' }
-          ],
-          page: {
-            total: 1
-          }
-        },
-      })
-    } else {
-      this.setData({
-        activeIndex: e.currentTarget.dataset.index,
-        order: {
-          items: [
-            { id: 2, active: '已配送', createtime: '2018-3-25 11:30', image_url: '/images/goods.png', title: '公牛开关插座86型暗装饰墙壁电源 面板三五孔电脑墙壁电源插座面板', name: '小张五金的客户', total: '2', total_price: '112', address: '上海市杨浦区昆明路518号北美广场A座1020室' },
-            { id: 2, active: '已下单', createtime: '2018-3-25 11:30', image_url: '/images/goods.png', title: '公牛开关插座86型暗装饰墙壁电源 面板三五孔电脑墙壁电源插座面板', name: '小张五金的客户', total: '2', total_price: '112', address: '上海市杨浦区昆明路518号北美广场A座1020室' }
-          ],
-          page: {
-            total: 1
-          }
-        },
-      })
+    this.setData({
+      activeIndex: e.currentTarget.dataset.index,
+    })
+    this.getOrderList(1, 10)
+  },
+  getOrderList(currentPage,showCount) {
+    var that = this
+    var data = {
+      currentPage: currentPage,
+      showCount: showCount
     }
-    
+    if (this.data.activeIndex) {
+      data.ORDER_STATUS = this.data.activeIndex
+    }
+    http.httpPost("/app/order/list", data, {}, function (res) {
+      if (res.code == '000000') {
+        util.upperJSONKey(res.data)
+        
+        util.upperListKey(res.data.order_list)
+        for (let i = 0; i < res.data.order_list.length; i++) {
+          util.upperListKey(res.data.order_list[i].detail_list)
+        }
+        if (currentPage == 1) {
+          var order_list = res.data.order_list
+        } else {
+          var order_list = that.data.order.order_list.concat(res.data.order_list)
+        }
+        var page = res.data.page
+        var order = { order_list, page }
+        
+        that.setData({
+          order: order
+        })
+        
+      }
+    })
+  },
+  orderDetail(e) {
+    console.log(e)
+    wx.navigateTo({
+      url: '/pages/order/detail/detail'
+    })
   }
 })
