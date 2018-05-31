@@ -38,6 +38,8 @@ Page({
       if (res.code == '000000') {
         util.upperJSONKey(res.data)
         app.globalData.userInfo = res.data
+        app.globalData.header.MID = res.data.member_id
+        app.globalData.header.SOCKET = res.data.socket
         var userInfo = JSON.stringify(res.data) + ''
         wx.setStorageSync(
           'userInfo', userInfo

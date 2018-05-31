@@ -14,14 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (app.globalData.userInfo) {
-      let mobile = app.globalData.userInfo.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        mobile: mobile
-      })
-      
-    }
+    
   },
 
   /**
@@ -35,7 +28,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    if (app.globalData.userInfo) {
+      let mobile = app.globalData.userInfo.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        mobile: mobile
+      })
+
+    }
   },
 
   /**

@@ -138,7 +138,7 @@ Page({
           wx.showModal({
             title: '购买成功',
             content: '您的商品已加入进货单，请选择继续购物或结算',
-            confirmText: "进入购物车",
+            confirmText: "提交订单",
             cancelText: "继续购物",
             success: function (res) {
               console.log(res);

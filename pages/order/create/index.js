@@ -93,6 +93,12 @@ Page({
                 wx.switchTab({
                   url: '/pages/order/list/list'
                 })
+              } else {
+                wx.showToast({
+                  title: res.msg,
+                  icon: 'none',
+                  duration: 2000
+                });
               }
             })
           } else {
