@@ -4,7 +4,7 @@
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__hd">
         <text>下单时间:{{ order.createtime }}</text>
-        <text class="text-right action">{{ order.active == 1?'已下单':(order.active==2?'已配送':'已完成') }}</text>
+        <text class="text-right action">{{ order.order_status == 1?'已下单':(order.order_status==2?'已配送':'已完成') }}</text>
       </view>
       <view class="weui-panel__bd">
         <block  wx:for="{{order.detail_list}}">

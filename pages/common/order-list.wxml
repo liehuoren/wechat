@@ -4,7 +4,7 @@
       <view class="weui-panel weui-panel_access">
           <view class="weui-panel__hd">
             <text>下单时间:{{ item.createtime }}</text>
-            <text class="text-right action">{{ item.active }}</text>
+            <text class="text-right action">{{ item.order_status == 1?'已下单':(order.order_status==2?'已配送':'已完成') }}</text>
           </view>
           <view class="weui-panel__bd">
               <navigator url="/pages/order/datail/detail?order_id={{item.order_id}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">

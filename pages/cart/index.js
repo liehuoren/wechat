@@ -42,7 +42,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onShow: function (options) {
     var that = this
     var data = {
       currentPage: 1,
@@ -200,6 +200,9 @@ Page({
           page: page
         })
         
+      } else if (res.code == 'ex8880000'){
+        wx.clearStorage()
+        wx.clearStorageSync()
       }
       that.saveChange()
     })

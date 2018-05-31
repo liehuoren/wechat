@@ -11,9 +11,6 @@ App({
       this.globalData.header.SOCKET = this.globalData.userInfo.socket
     }
     console.log(this.globalData.userInfo)
-    if (this.globalData.userInfo) {
-      
-    }
   },
   globalData: {
     userInfo: null,
