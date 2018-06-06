@@ -67,7 +67,7 @@ Page({
       data.ORDER_STATUS = this.data.activeIndex
     }
     http.httpPost("/app/order/list", data, {}, function (res) {
-      if (res.code == '000000') {
+      if (res.code == '000000' && res.data != null) {
         util.upperJSONKey(res.data)
         
         util.upperListKey(res.data.order_list)

@@ -41,7 +41,7 @@ Page({
     
     let that = this
     if (options) {
-      http.httpPost("/app/product/id", { PRODUCT_ID: 'E09005-C1'}, {}, function (res) {
+      http.httpPost("/app/product/id", { PRODUCT_ID: options.id}, {}, function (res) {
         util.upperJSONKey(res.data)
         util.upperJSONKey(res.data.product)
         util.upperListKey(res.data.product_images)

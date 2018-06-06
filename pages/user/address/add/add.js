@@ -129,8 +129,14 @@ Page({
           wx.showToast({
             title: '添加成功',
             icon: 'success',
-            duration: 2000
+            duration: 2000,
+            success() {
+              wx.navigateBack({
+                delta: 1
+              })
+            }
           });
+
         } else {
           wx.showToast({
             title: '添加失败',

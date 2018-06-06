@@ -14,8 +14,8 @@
   background-size:243rpx 243rpx;
 }
 .logo image {
-  width: 181rpx;
-  height: 76rpx;
+  width: 283rpx;
+  height: 283rpx;
   display: inline-block; 
   vertical-align: middle;
 }

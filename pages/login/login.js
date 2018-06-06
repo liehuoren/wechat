@@ -40,6 +40,9 @@ Page({
         app.globalData.userInfo = res.data
         app.globalData.header.MID = res.data.member_id
         app.globalData.header.SOCKET = res.data.socket
+        if (res.data.open_id == null || res.data.open_id == '') {
+          that.bindUserWx()
+        }
         var userInfo = JSON.stringify(res.data) + ''
         wx.setStorageSync(
           'userInfo', userInfo
@@ -65,6 +68,31 @@ Page({
       
     })
 
+  },
+  bindUserWx() {
+    wx.login({
+      success: function (res) {
+        if (res.code) {
+          //发起网络请求
+          http.httpPost('/app/user/bindUserByCode',{code:res.code},{},function(ress){
+
+          })
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    });
+  },
+  clearPhone() {
+    var mobile = ''
+    this.setData({
+      mobile: mobile
+    })
+  },
+  clearPassword() {
+    this.setData({
+      pwd: ''
+    })
   },
   /**
    * 生命周期函数--监听页面加载

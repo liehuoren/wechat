@@ -147,5 +147,10 @@ Page({
       var nextPage = this.data.goods.page.currentPage + 1
       this.getProducts(nextPage, this.data.goods.page.showCount)
     }
-  }
+  },
+  goodDetails(e) {
+    wx.navigateTo({
+      url: '/pages/goods/index?id=' + e.currentTarget.dataset.id,
+    })
+  },
 })

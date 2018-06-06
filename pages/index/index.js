@@ -33,7 +33,7 @@ Page({
     }
   },
   
-  onLoad: function () {
+  onShow: function () {
     var that = this
     http.httpPost("/app/home/top", '', {}, function (res) {
       util.upperJSONKey(res.data)
@@ -92,6 +92,19 @@ Page({
         goods: goods
       })
     })
+  },
+  onPullDownRefresh: function () {
+    var that = this
+    http.httpPost("/app/home/top", '', {}, function (res) {
+      util.upperJSONKey(res.data)
+      util.upperListKey(res.data.banner_list)
+      that.setData({
+        banners: res.data.banner_list,
+        companyInfomation: res.data.company_infomation,
+        videoUrl: res.data.video_url
+      })
+    })
+    that.getHotproducts(1, 5)
   }
   
 })

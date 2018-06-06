@@ -44,7 +44,7 @@
 </checkbox-group>
 
 <view class="footer">
-  <view class="check" bindtap='checkAll'>
+  <view class="check" bindtap='checkAll' wx:if="{{!prompt.hidden}}">
       <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!checkedAll}}"></icon>
       <icon class="weui-icon-checkbox_success" type="success" color="#ffaa2b" size="23" wx:if="{{checkedAll}}"></icon>
   </view>

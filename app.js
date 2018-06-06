@@ -9,6 +9,10 @@ App({
       this.globalData.userInfo = JSON.parse(userInfo)
       this.globalData.header.MID = this.globalData.userInfo.member_id
       this.globalData.header.SOCKET = this.globalData.userInfo.socket
+    } else {
+      wx.redirectTo({
+        url: '/pages/login/login'
+      })
     }
     console.log(this.globalData.userInfo)
     if (this.globalData.userInfo) {

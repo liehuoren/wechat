@@ -1,6 +1,6 @@
 <!--pages/about/index.wxml-->
 <view class="page">
-  <view class="logo" style="background: url(/images/logo-bg.png) no-repeat;background-position: center center;background-size: 100% 100%;">
+  <view class="logo" >
     <image src="{{logo_url}}"></image>
   </view>
   <view class="page__bd">
