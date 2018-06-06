@@ -15,9 +15,6 @@ App({
       })
     }
     console.log(this.globalData.userInfo)
-    if (this.globalData.userInfo) {
-      
-    }
   },
   globalData: {
     userInfo: null,

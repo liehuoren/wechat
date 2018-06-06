@@ -70,16 +70,25 @@ Page({
       if (res.code == '000000' && res.data != null) {
         util.upperJSONKey(res.data)
         
-        util.upperListKey(res.data.order_list)
-        for (let i = 0; i < res.data.order_list.length; i++) {
-          util.upperListKey(res.data.order_list[i].detail_list)
-        }
-        if (currentPage == 1) {
-          var order_list = res.data.order_list
+        
+        if (res.data == null) {
+          var order_list = []
+          var page = that.data.order.page
         } else {
-          var order_list = that.data.order.order_list.concat(res.data.order_list)
+          util.upperListKey(res.data.order_list)
+          for (let i = 0; i < res.data.order_list.length; i++) {
+            util.upperListKey(res.data.order_list[i].detail_list)
+          }
+          if (currentPage == 1) {
+            var order_list = res.data.order_list
+          } else {
+            var order_list = that.data.order.order_list.concat(res.data.order_list)
+          }
+          var page = res.data.page
         }
-        var page = res.data.page
+        
+        
+        
         var order = { order_list, page }
         
         that.setData({
