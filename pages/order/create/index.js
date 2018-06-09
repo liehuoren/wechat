@@ -37,7 +37,7 @@ Page({
   },
   addAddress() {
     wx.navigateTo({
-      url: '/pages/user/address/add/add',
+      url: '/pages/user/address/add/add?select=0',
     })
   },
   selectAddress() {

@@ -229,6 +229,7 @@ swiper-item .slide-dec {
   height: 88rpx;
   margin: 0 auto;
   color: #fff;
+  line-height: 88rpx;
 }
 .show-popup{
   position: fixed;

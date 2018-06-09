@@ -3,11 +3,11 @@
   <view class="weui-form-preview">
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__hd">
-        <text>下单时间:{{ order.createtime }}</text>
+        <text>下单时间:{{ order.create_time }}</text>
         <text class="text-right action">{{ order.order_status == 1?'已下单':(order.order_status==2?'已配送':'已完成') }}</text>
       </view>
       <view class="weui-panel__bd">
-        <block  wx:for="{{order.detail_list}}">
+        <block  wx:for="{{order.detail_list}}" wx:key="{{item.order_id}}">
           <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
               <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
                   <image class="weui-media-box__thumb" src="{{ item.product_image }}" />
@@ -68,7 +68,7 @@
             <view class="weui-label">物流公司</view>
         </view>
         <view class="weui-cell__bd">
-            
+            {{order.logistics_company_name}}
         </view>
     </view>
     <view class="weui-cell weui-cell_acces">
@@ -76,7 +76,7 @@
             <view class="weui-label">运单号</view>
         </view>
         <view class="weui-cell__bd">
-            
+            {{order.logistics_no}}
         </view>
     </view>
     <view class="weui-cell weui-cell_acces">

@@ -1,4 +1,6 @@
 <!--pages/search/index.wxml-->
+<import src="../common/list.wxml"/>
+
 <view class="weui-search-bar">
     <view class="weui-search-bar__form">
         <view class="weui-search-bar__box">
@@ -13,5 +15,8 @@
             <view class="weui-search-bar__text">搜索</view>
         </label>
     </view>
-    <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+    <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="search">搜索</view>
+</view>
+<view>
+  <template is="list" data="{{ goods, prompt }}"/>
 </view>

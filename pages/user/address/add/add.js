@@ -16,6 +16,7 @@ Page({
     selProvince: '请选择',
     selCity: '请选择',
     selDistrict: '请选择',
+    select: false
   },
 
   initArea(level, code) {
@@ -66,6 +67,9 @@ Page({
    */
   onLoad: function (options) {
     this.initArea(1, null)
+    this.setData({
+      select: options.select
+    })
   },
   bindPickerProvinceChange(e) {
     let selProvince = this.data.provinces[e.detail.value]
@@ -91,6 +95,7 @@ Page({
     })
   },
   submitForm(e) {
+    var that = this
     var address = e.detail.value
     var reg = /^((17[0-9])|(14[0-9])|(13[0-9])|(15[0-9])|(18[0-9]))\d{8}$/
     if (!address.take_by) {
@@ -131,8 +136,13 @@ Page({
             icon: 'success',
             duration: 2000,
             success() {
+              if (that.data.select == 1) {
+                var delta = 2
+              } else {
+                var delta = 1
+              }
               wx.navigateBack({
-                delta: 1
+                delta: delta
               })
             }
           });

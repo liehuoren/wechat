@@ -47,7 +47,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onShow: function (options) {
     // wx.hideTabBar();
     this.getOrderList(1, 10)
   },
@@ -67,16 +67,18 @@ Page({
       data.ORDER_STATUS = this.data.activeIndex
     }
     http.httpPost("/app/order/list", data, {}, function (res) {
-      if (res.code == '000000' && res.data != null) {
-        util.upperJSONKey(res.data)
+      if (res.code == '000000') {
+        
         
         
         if (res.data == null) {
           var order_list = []
-          var page = that.data.order.page
+          var page = {}
         } else {
+          util.upperJSONKey(res.data)
           util.upperListKey(res.data.order_list)
           for (let i = 0; i < res.data.order_list.length; i++) {
+            res.data.order_list[i].create_time = util.timestampToTime(res.data.order_list[i].create_time) 
             util.upperListKey(res.data.order_list[i].detail_list)
           }
           if (currentPage == 1) {
@@ -87,8 +89,6 @@ Page({
           var page = res.data.page
         }
         
-        
-        
         var order = { order_list, page }
         
         that.setData({
@@ -96,12 +96,6 @@ Page({
         })
         
       }
-    })
-  },
-  orderDetail(e) {
-    console.log(e)
-    wx.navigateTo({
-      url: '/pages/order/detail/detail'
     })
   }
 })

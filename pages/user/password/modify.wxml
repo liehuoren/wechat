@@ -7,9 +7,9 @@
               <image src="/images/icon-old-pass.png" style="margin-right: 15px;vertical-align: middle;width:20px; height: 20px;"></image>
           </view>
           <view class="weui-cell__bd">
-              <input class="weui-input"  bindinput="pwdInput" password="true" placeholder="请输入旧密码" />
+              <input class="weui-input" value='{{pwd}}'  bindinput="pwdInput" password="true" placeholder="请输入旧密码" />
           </view>
-          <view class="weui-cell__ft">
+          <view class="weui-cell__ft" bindtap='clearPwd'>
               <icon type="cancel" color="#999" size="12" style="margin-right: 15px;"></icon>
           </view>
       </view>
@@ -18,9 +18,9 @@
               <image src="/images/icon-pass.png" style="margin-right: 15px;vertical-align: middle;width:20px; height: 20px;"></image>
           </view>
           <view class="weui-cell__bd">
-              <input class="weui-input" bindinput="newPwdInput" password="true" placeholder="请输入新密码" />
+              <input class="weui-input" value='{{newPwd}}' bindinput="newPwdInput" password="true" placeholder="请输入新密码" />
           </view>
-          <view class="weui-cell__ft">
+          <view class="weui-cell__ft" bindtap='clearNewPwd'>
               <icon type="cancel" color="#999" size="12" style="margin-right: 15px;"></icon>
           </view>
       </view>
@@ -29,9 +29,9 @@
               <image src="/images/icon-pass.png" style="margin-right: 15px;vertical-align: middle;width:20px; height: 20px;"></image>
           </view>
           <view class="weui-cell__bd">
-              <input class="weui-input" bindinput="newPwdrInput" password="true" placeholder="确认新密码" />
+              <input class="weui-input" value='{{newPwdr}}' bindinput="newPwdrInput" password="true" placeholder="确认新密码" />
           </view>
-          <view class="weui-cell__ft">
+          <view class="weui-cell__ft" bindtap='clearNewPwdr'>
               <icon type="cancel" color="#999" size="12" style="margin-right: 15px;"></icon>
           </view>
       </view>

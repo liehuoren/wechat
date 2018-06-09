@@ -39,18 +39,14 @@ Page({
     }
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onShow: function (options) {
-    var that = this
     var data = {
       currentPage: 1,
       showCount: 10
     }
-    this.getCarts(1, this.data.page.showCount)
+    this.getCarts(1, 10)
   },
-  goShop () {
+  goTo () {
     wx.navigateTo({
       url: '/pages/order/list/list'
     })
@@ -163,6 +159,7 @@ Page({
     if (this.data.shoppingcart_list.length == 0) {
       this.data.prompt.hidden = 0
       this.setData({
+        allPrice: 0,
         prompt: this.data.prompt
       })
     } else {
@@ -173,8 +170,10 @@ Page({
           prices += checkboxItems[i].price * checkboxItems[i].amount
         }
       }
+      this.data.prompt.hidden = !0
       this.setData({
-        allPrice: prices
+        allPrice: prices,
+        prompt: this.data.prompt
       });
     }
   },
@@ -188,12 +187,20 @@ Page({
     }
   },
   getCarts(currentPage, showCount) {
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this
     http.httpPost("/app/shoppingcart/list", { currentPage: currentPage, showCount: showCount }, {}, function (res) {
       if(res.code == '000000') {
         util.upperJSONKey(res.data)
         util.upperListKey(res.data.shoppingcart_list)
-        var shoppingcart_list = that.data.shoppingcart_list.concat(res.data.shoppingcart_list)
+        if (currentPage == 1) {
+          var shoppingcart_list = res.data.shoppingcart_list
+        } else {
+          var shoppingcart_list = that.data.shoppingcart_list.concat(res.data.shoppingcart_list)
+        }
+        
         var page = res.data.page
         that.setData({
           shoppingcart_list: shoppingcart_list,
@@ -206,6 +213,7 @@ Page({
           url: '/pages/login/login'
         })
       }
+      wx.hideLoading()
       that.saveChange()
     })
   },

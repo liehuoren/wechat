@@ -12,7 +12,7 @@
         <icon class="weui-icon-checkbox_success" type="success" color="#ffaa2b" size="23" wx:else></icon>
     </view>
   </label>
-  <view class="weui-panel__bd" style="flex-shrink:1">
+  <view class="weui-panel__bd">
       <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" data-id="{{ item.shoppingcart_id }}">
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
               <image class="weui-media-box__thumb" src="{{ item.product_image }}" />
@@ -37,14 +37,14 @@
           </view>
       </view>
   </view>
-  <view class="right" style="flex-shrink:1" bindtap='delete' data-index="{{ index }}">
+  <view class="right" bindtap='delete' data-index="{{ index }}">
       <image src="/images/cart-del.png"></image>
   </view>
 </view>
 </checkbox-group>
 
 <view class="footer">
-  <view class="check" bindtap='checkAll' wx:if="{{!prompt.hidden}}">
+  <view class="all-check" bindtap='checkAll'>
       <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!checkedAll}}"></icon>
       <icon class="weui-icon-checkbox_success" type="success" color="#ffaa2b" size="23" wx:if="{{checkedAll}}"></icon>
   </view>

@@ -10,7 +10,7 @@
         <block wx:for="{{banners}}" wx:key="id">
             <swiper-item>
                 <image bindtap="tapBanner" src="{{item.img_url}}" class="slide-image" />
-                <view class="slide-text">
+                <!-- <view class="slide-text">
                   <view class="slide-title">
                     <span class="line"></span>
                     <text class="title">{{item.link_title}}</text>
@@ -19,7 +19,7 @@
                   <view class="slide-dec">
                     小张五金着力与您共创美好生活
                   </view>
-                </view>
+                </view> -->
                 
             </swiper-item>
         </block>

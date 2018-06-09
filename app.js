@@ -5,12 +5,13 @@ App({
     var MID = wx.getStorageSync('MID') || ''
     var SOCKET = wx.getStorageSync('SOCKET') || ''
     var userInfo = wx.getStorageSync('userInfo') || ''
-    if (userInfo) {
+    
+    if (userInfo != '') {
       this.globalData.userInfo = JSON.parse(userInfo)
       this.globalData.header.MID = this.globalData.userInfo.member_id
       this.globalData.header.SOCKET = this.globalData.userInfo.socket
     } else {
-      wx.redirectTo({
+      wx.reLaunch({
         url: '/pages/login/login'
       })
     }

@@ -128,6 +128,9 @@ Page({
         duration: 2000
       });
     } else {
+      wx.showLoading({
+        title: '加载中',
+      })
       var data = {
         'PRODUCT_ID': this.data.product.product_id,
         'PRODUCT_SPECIFICATION_ID': this.data.selectSpecification.specification_id,
@@ -136,9 +139,9 @@ Page({
       http.httpPost('/app/shoppingcart/create',data,{},function(res){
         if(res.code == '000000') {
           wx.showModal({
-            title: '购买成功',
+            title: '加入进货单成功',
             content: '您的商品已加入进货单，请选择继续购物或结算',
-            confirmText: "提交订单",
+            confirmText: "进货单",
             cancelText: "继续购物",
             success: function (res) {
               console.log(res);
@@ -160,6 +163,7 @@ Page({
             duration: 2000
           });
         }
+        wx.hideLoading()
       })
     }
   },

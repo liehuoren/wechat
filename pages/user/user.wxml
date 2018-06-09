@@ -17,16 +17,16 @@
 
   <view class="page__bd">
     <view class="weui-cells weui-cells_after-title">
-      <navigator url="/pages/login/login" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
         <view class="weui-cell__hd">
           <image src="/images/icon-user-c.png" style="margin-right: 10px;vertical-align: middle;width:20px; height: 20px;"></image>
         </view>
         <view class="weui-cell__bd">我的账号</view>
         <view class="weui-cell__ft" wx:if="{{userInfo}}">{{mobile}}</view>
         <view class="weui-cell__ft" wx:else>未登录</view>
-      </navigator>
+      </view>
 
-      <navigator url="address/list/list" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <navigator url="address/list/list?select=0" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
         <view class="weui-cell__hd">
           <image src="/images/icon-address.png" style="margin-right: 10px;vertical-align: middle;width:20px; height: 20px;"></image>
         </view>

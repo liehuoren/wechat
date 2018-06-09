@@ -45,10 +45,15 @@ page{
 .cart {
   display: flex;
   width: 100%;
+  -webkit-align-items:center;
+  align-items:center;
+  -webkit-justify-content:center;
+  justify-content:center;
 }
 .cart .weui-cell, .cart .weui-panel__bd {
   display: flex;
-  width: 78%;
+  width: 75%;
+  flex-grow: 1;
 }
 .cart .weui-media-box__hd_in-appmsg {
   width: 35%;
@@ -66,10 +71,11 @@ page{
   display: flex;
   justify-content:center;
   align-items:center;
+  flex-grow: 1;
 }
 .right image {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
 }
 .footer {
   position: fixed;
@@ -80,11 +86,11 @@ page{
   display: flex;
   -webkit-align-items:center;
   align-items:center;
-  -webkit-justify-content:center;
-  justify-content:center;
+  -webkit-justify-content:space-between;
+  justify-content:space-between;
   background-color: #fff;
 }
-.footer .check {
+.footer .all-check {
   width: 20%;
   height: 100%;
   display: flex;
@@ -94,24 +100,21 @@ page{
   justify-content:center;
 }
 .footer .heji {
-  width: 60%;
+  width: 45%;
   height: 100%;
   display: flex;
   -webkit-align-items:center;
   align-items:center;
-  -webkit-justify-content:center;
-  justify-content:center;
+  -webkit-justify-content:flex-end;
+  justify-content:flex-end;
 }
 .footer .jiesuan {
   width: 30%;
   height: 100%;
-  display: flex;
-  -webkit-align-items:center;
-  align-items:center;
-  -webkit-justify-content:center;
-  justify-content:center;
   background-color: #ffaa2b;
   color: #FFF;
+  line-height: 100rpx;
+  text-align: center;
 }
 .price {
   color: #ffaa2b;
@@ -128,5 +131,6 @@ page{
 .check {
   padding: 0;
   width:10%;
-  max-width:38px;
+  max-width:30px;
+  flex-grow: 0;
 }

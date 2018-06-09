@@ -1,7 +1,9 @@
 var root = 'http://smallapi.capsui.com'
 var app = getApp()
 function Get(url, data, header, cb) {
-  wx.showNavigationBarLoading();
+  wx.showLoading({
+    title: '加载中'
+  })
   wx.request({
     method: 'GET',
     url: root + url,
@@ -9,16 +11,19 @@ function Get(url, data, header, cb) {
     header: Object.assign({}, app.globalData.header, header),
     success: (res) => {
       typeof cb == "function" && cb(res.data, "");
-      wx.hideNavigationBarLoading();
+      wx.hideLoading()
     },
     fail: (err) => {
       typeof cb == "function" && cb(null, err.errMsg);
-      wx.hideNavigationBarLoading();
+      wx.hideLoading()
     }
   });
 };
 
 function Post(url, data, header, cb) {
+  wx.showLoading({
+    title: '加载中'
+  })
   wx.request({
     url: root + url,
     data: data,
@@ -26,9 +31,17 @@ function Post(url, data, header, cb) {
     dataType: 'json',
     method: 'POST',
     success: (res) => {
+      wx.hideLoading()
+      if (res.data.code == 'ex8880000') {
+        wx.clearStorage()
+        wx.reLaunch({
+          url: '/pages/login/login'
+        })
+      }
       typeof cb == "function" && cb(res.data, "");
     },
     fail: (err) => {
+      wx.hideLoading()
       typeof cb == "function" && cb(null, err.errMsg);
       console.log(err)
     }

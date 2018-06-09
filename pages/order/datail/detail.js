@@ -14,13 +14,13 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onShow: function (options) {
+  onLoad: function (options) {
     var that = this
     http.httpPost('/app/order/id',{ORDER_ID:options.order_id},{},function(res){
       if(res.code == '000000') {
         util.upperJSONKey(res.data)
         util.upperListKey(res.data.detail_list)
-
+        res.data.create_time = util.timestampToTime(res.data.create_time)
         that.setData({
           order: res.data
         })

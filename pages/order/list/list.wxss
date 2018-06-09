@@ -20,4 +20,9 @@
 .action {
   color: #ffaa2b;
 }
-
+.weui-panel .weui-panel__bd {
+  border-bottom: 1px solid #eee
+}
+.weui-form-preview {
+  margin-bottom: 10px; 
+}

@@ -33,7 +33,7 @@ Page({
     }
   },
   
-  onShow: function () {
+  onLoad: function () {
     var that = this
     http.httpPost("/app/home/top", '', {}, function (res) {
       util.upperJSONKey(res.data)

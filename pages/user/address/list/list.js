@@ -16,7 +16,7 @@ Page({
   },
   add() {
     wx.navigateTo({
-      url: '/pages/user/address/add/add'
+      url: '/pages/user/address/add/add?select=' + this.data.select
     })
   },
   edit(e) {
@@ -47,7 +47,6 @@ Page({
               that.setData({
                 address: that.data.address
               })
-              that.saveChange()
             }
           })
         } else {
@@ -62,11 +61,6 @@ Page({
       if (e.currentTarget.dataset.id == item.address_id) {
         if (item.is_default == 0) {
           item.is_default = 1
-          this.updateAddress(item)
-        }
-      } else {
-        if(item.is_default == 1) {
-          item.is_default = 0
           this.updateAddress(item)
         }
       }
@@ -88,36 +82,38 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  onLoad: function (option) {
+    this.setData({
+      select: option.select
+    })
+  },
   onShow: function (options) {
     var that = this
     http.httpPost('/app/user/address/list','',{},function(res){
       if (res.code == '000000') {
         // util.upperJSONKey(res.data)
         util.upperListKey(res.data)
-        console.log(res.data)
         that.setData({
           address: res.data
         })
       }
     })
-    if(options.select) {
-      this.setData({
-        select: true
-      })
-    }
+    
+    
   },
   select(e){
-    if(this.data.select) {
+    if(this.data.select == 1) {
       var address = this.data.address
       for (var item of address) {
         if (e.currentTarget.dataset.id == item.address_id) {
           if (item.is_default == 0) {
             item.is_default = 1
             this.updateAddress(item)
-            wx.navigateBack({})
+            
           }
         }
       }
+      wx.navigateBack({})
     }
     
   }

@@ -21,7 +21,7 @@
     "navigationBarBackgroundColor": "#ffaa2b",
     "navigationBarTitleText": "小张五金",
     "navigationBarTextStyle": "white",
-    "enablePullDownRefresh": true
+    "enablePullDownRefresh": false
   },
   "tabBar": {
     "color": "#999999",
@@ -45,7 +45,7 @@
         "pagePath": "pages/order/list/list",
         "text": "订单",
         "iconPath": "images/tab-order.png",
-        "selectedIconPath": "images/tab-order.png"
+        "selectedIconPath": "images/tab-order-i.png"
       },
       {
         "pagePath": "pages/user/user",

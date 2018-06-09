@@ -33,6 +33,7 @@ Page({
   },
 
   confirm: function () {
+    var that = this
     if (this.data.newPwd != this.data.newPwd) {
       this.data.showTopTips = true
       this.data.topTips = '密码不一致'
@@ -40,8 +41,6 @@ Page({
     }
     http.httpPost('/app/user/pwd/edit',{mobile: app.globalData.userInfo.mobile, pwd: this.data.pwd, newPwd: this.data.newPwd}, {}, function(res) {
       if (res.code == '000000') {
-        app.globalData.userInfo = ''
-        wx.clearStorageSync()
         wx.showModal({
           title: '提示',
           content: '修改成功',
@@ -49,12 +48,30 @@ Page({
           confirmColor: "#ffaa2b",
           cancelText: "返回",
           success: function (res) {
-            this.data.showTopTips = false
+            that.data.showTopTips = false
             if (res.confirm) {
-              console.log('用户点击主操作')
+              wx.switchTab({
+                url: '/pages/user/user'
+              })
             } else {
-              console.log('用户点击辅助操作')
+              wx.switchTab({
+                url: '/pages/user/user'
+              })
             }
+          }
+        });
+      } else if (res.code == 'ex8880000') {
+        wx.showModal({
+          title: '提示',
+          content: res.msg,
+          confirmText: "确认",
+          confirmColor: "#ffaa2b",
+          cancelText: "返回",
+          success: function (res) {
+            that.data.showTopTips = false
+            wx.reLaunch({
+              url: '/pages/login/login'
+            })
           }
         });
       } else {
@@ -65,7 +82,7 @@ Page({
           confirmColor: "#ffaa2b",
           cancelText: "返回",
           success: function (res) {
-            this.data.showTopTips = false
+            that.data.showTopTips = false
             if (res.confirm) {
               console.log('用户点击主操作')
             } else {
@@ -78,7 +95,21 @@ Page({
     })
     
   },
-
+  clearPwd() {
+    this.setData({
+      pwd: ''
+    })
+  },
+  clearNewPwd() {
+    this.setData({
+      newPwd: ''
+    })
+  },
+  clearNewPwdr() {
+    this.setData({
+      newPwdr: ''
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
