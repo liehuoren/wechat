@@ -92,7 +92,6 @@ Page({
     this.setData({
       address: address,
     })
-    console.log(address)
     this.initArea(1, null)
     this.initArea(2, address.provinc_id)
     this.initArea(3, address.city_id)
@@ -163,7 +162,12 @@ Page({
           wx.showToast({
             title: '更新成功',
             icon: 'success',
-            duration: 2000
+            duration: 2000,
+            success() {
+              wx.navigateBack({
+                delta: 1
+              })
+            }
           });
         } else {
           wx.showToast({

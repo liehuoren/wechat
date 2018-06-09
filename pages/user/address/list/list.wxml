@@ -17,11 +17,11 @@
               </view>
               <view class="weui-media-box__info__meta text-orangered">默认地址</view>
               <view class="right">
-                <view class="weui-media-box__info__meta text-orangered tool" data-index="{{index}}" bindtap="edit">
+                <view class="weui-media-box__info__meta text-orangered tool" data-index="{{index}}" catchtap="edit">
                   <image src="/images/icon-edit.png" class="icon"></image>
                   <text>编辑</text>
                 </view>
-                <view class="weui-media-box__info__meta text-orangered tool" data-index="{{index}}" bindtap="delete">
+                <view class="weui-media-box__info__meta text-orangered tool" data-index="{{index}}" catchtap="delete">
                   <image src="/images/icon-del.png" class="icon"></image>
                   <text>删除</text>
                 </view>

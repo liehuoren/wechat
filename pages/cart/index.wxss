@@ -89,6 +89,7 @@ page{
   -webkit-justify-content:space-between;
   justify-content:space-between;
   background-color: #fff;
+  z-index:999;
 }
 .footer .all-check {
   width: 20%;

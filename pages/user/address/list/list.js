@@ -20,8 +20,10 @@ Page({
     })
   },
   edit(e) {
+    
     var index = e.currentTarget.dataset.index
     var address = JSON.stringify(this.data.address[index])
+    
     wx.navigateTo({
       url: '/pages/user/address/edit/edit?address=' + address
     })
@@ -74,9 +76,7 @@ Page({
   updateAddress (address) {
     var data = util.lowerJSONKey(address)
     http.httpPost('/app/user/address/edit',data,{},function(res){
-      if(res.code == '000000') {
 
-      }
     })
   }, 
   /**
@@ -107,13 +107,20 @@ Page({
       for (var item of address) {
         if (e.currentTarget.dataset.id == item.address_id) {
           if (item.is_default == 0) {
+            console.log(item)
             item.is_default = 1
-            this.updateAddress(item)
-            
+            var data = util.lowerJSONKey(item)
+            http.httpPost('/app/user/address/edit', data, {}, function (res) {
+              if(res.code == '000000') {
+                wx.navigateBack({})
+              }
+            })
+          } else {
+            wx.navigateBack({})
           }
         }
       }
-      wx.navigateBack({})
+      
     }
     
   }

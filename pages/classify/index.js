@@ -45,9 +45,9 @@ Page({
     this.getProducts(1, 10)
   },
   showInput: function () {
-    this.setData({
-      inputShowed: true
-    });
+    wx.navigateTo({
+      url: '/pages/search/index'
+    })
   },
   hideInput: function () {
     this.setData({

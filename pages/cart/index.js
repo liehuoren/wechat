@@ -235,6 +235,10 @@ Page({
         checked.push(checkboxItems[i])
       }
     }
+    if (checked.length == 0){
+      wx.hideLoading();
+      return;
+    } 
     wx.setStorage({
       key: "cart",
       data: checked

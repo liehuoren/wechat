@@ -47,15 +47,14 @@ Page({
         util.upperListKey(res.data.product_images)
         util.upperListKey(res.data.product_params)
         util.upperListKey(res.data.product_specifications)
-        console.log(res.data)
-        
+
         that.setData({
           product: res.data.product,
           product_images: res.data.product_images,
           product_params: res.data.product_params,
           product_specifications: res.data.product_specifications
         })
-        console.log(res.data.product_specifications)
+
         WxParse.wxParse('article', 'html', res.data.product.product_detail, that, 5);
       })
     }
@@ -63,12 +62,13 @@ Page({
   selectSpecification(e) {
     var index = e.currentTarget.dataset.index
     var that = this
-    console.log(that.data.product_specifications[index])
     this.setData({
       selectSpecification: that.data.product_specifications[index]
     })
   },
-  
+  swiperchange(e) {
+
+  },
   tabClick(e) {
     this.setData({
       tabAction: e.currentTarget.dataset.tab
@@ -128,9 +128,6 @@ Page({
         duration: 2000
       });
     } else {
-      wx.showLoading({
-        title: '加载中',
-      })
       var data = {
         'PRODUCT_ID': this.data.product.product_id,
         'PRODUCT_SPECIFICATION_ID': this.data.selectSpecification.specification_id,
@@ -144,7 +141,6 @@ Page({
             confirmText: "进货单",
             cancelText: "继续购物",
             success: function (res) {
-              console.log(res);
               if (res.confirm) {
                 wx.switchTab({
                   url: '/pages/cart/index'
@@ -163,7 +159,6 @@ Page({
             duration: 2000
           });
         }
-        wx.hideLoading()
       })
     }
   },

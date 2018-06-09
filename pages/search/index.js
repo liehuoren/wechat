@@ -5,7 +5,7 @@ var util = require('/../../utils/util.js')
 Page({
 
   data: {
-    inputShowed: false,
+    inputShowed: true,
     inputVal: "",
     goods: {
       product_list: [
