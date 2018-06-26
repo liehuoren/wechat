@@ -1,4 +1,4 @@
-var root = 'http://smallapi.capsui.com'
+var root = 'https://www.hqxzwj.com/small-api'
 var app = getApp()
 function Get(url, data, header, cb) {
   wx.showLoading({

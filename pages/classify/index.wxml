@@ -1,6 +1,6 @@
 <!--pages/classify/index.wxml-->
 <import src="../common/list.wxml"/>
-<view class="page">
+<view class="page" style="height: 93%;">
   <view class="weui-search-bar">
     <view class="weui-search-bar__form">
         <view class="weui-search-bar__box">
@@ -28,9 +28,9 @@
         </view>
       </scroll-view>
 	</view>
-	<view class="nav_right">
-		<view class="content">
-			<scroll-view scroll-y="true" style="height: {{ (deviceHeight + 50) + 'px' }}" bindscrolltolower="getMoreGoods" bindscrolltoupper="onRefreshGoods">
+	<view class="nav_right" style="height: 100%;">
+		<view class="content" style="height: 100%;">
+			<scroll-view scroll-y="true" style="height: 100%; min-height: 500px" bindscrolltolower="getMoreGoods" bindscrolltoupper="onRefreshGoods">
 				<template is="list" data="{{ goods, prompt }}"/>
 			</scroll-view>
 		</view>

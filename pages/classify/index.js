@@ -32,7 +32,7 @@ Page({
     ping_type: [],
     selectPro: '-1',
     selectPing: '-1',
-    deviceHeight: '500'
+    deviceHeight: 500
 
   },
 
@@ -73,7 +73,7 @@ Page({
   },
   getProType() {
     var that = this
-    http.httpPost('/app/common/dic/subcollection', { code: 'PRO_TYPE'},{},function(res){
+    http.httpPost('/app/common/dic/subcollection', { code: ''},{},function(res){
       if(res.code == '000000') {
         util.upperListKey(res.data)
         that.setData({
@@ -132,12 +132,10 @@ Page({
         } else {
           var product_list = that.data.goods.product_list.concat(res.data.project_list)
         }
-        var deviceHeight = product_list.length * 132
         var page = res.data.page
         var goods = { product_list, page }
         that.setData({
-          goods: goods,
-          deviceHeight: deviceHeight
+          goods: goods
         })
       }
     })
