@@ -30,8 +30,10 @@ Page({
     value: '全部',
     pro_type: [],
     ping_type: [],
-    selectPro: '-1',
-    selectPing: '-1',
+    series_type: [],
+    selectPro: 0,
+    selectPing: 0,
+    selectSeries: 0,
     deviceHeight: 500
 
   },
@@ -40,9 +42,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getProType()
     this.getPingType()
-    this.getProducts(1, 10)
   },
   showInput: function () {
     wx.navigateTo({
@@ -69,16 +69,35 @@ Page({
     this.setData({
       selectPro: e.currentTarget.dataset.index
     });
-    this.getProducts(1, 10)
+    this.getSeriesType(this.data.pro_type[this.data.selectPro].bianma)
+
   },
-  getProType() {
+  getSeriesType(code) {
     var that = this
-    http.httpPost('/app/common/dic/subcollection', { code: ''},{},function(res){
+    http.httpPost('/app/common/dic/subcollection', { code: code }, {}, function (res) {
+      if (res.code == '000000') {
+        util.upperListKey(res.data)
+        that.setData({
+          serise_type: res.data,
+          selectSerise: 0
+        })
+        that.getProducts(1, 10)
+      }
+    })
+  },
+  getProType(code) {
+    var that = this
+    http.httpPost('/app/common/dic/subcollection', { code: code },{},function(res){
       if(res.code == '000000') {
         util.upperListKey(res.data)
         that.setData({
-          pro_type: res.data
+          pro_type: res.data,
+          selectPro: 0
         })
+        if (that.data.pro_type != null && that.data.pro_type.length > 0) {
+          that.getSeriesType(that.data.pro_type[0].bianma)
+        }
+        
       }
     })
   },
@@ -88,14 +107,19 @@ Page({
       if (res.code == '000000') {
         util.upperListKey(res.data)
         that.setData({
-          ping_type: res.data
+          ping_type: res.data,
+          selectPing: 0
         })
+        if (that.data.ping_type != null && that.data.ping_type.length > 0) {
+          that.getProType(that.data.ping_type[0].bianma)
+        }
+        
       }
     })
   },
   selectPing() {
     var that = this
-    var itemList = ['全部']
+    var itemList = []
     for(var i=0;i< this.data.ping_type.length;i++){
       itemList.push(this.data.ping_type[i].name)
     }
@@ -104,9 +128,9 @@ Page({
       success: function (res) {
         if (!res.cancel) {
           that.setData({
-            selectPing: res.tapIndex - 1
+            selectPing: res.tapIndex
           })
-          that.getProducts(1, 10)
+          that.getProType(that.data.ping_type[that.data.selectPing].bianma)
         }
       }
     });
@@ -117,11 +141,14 @@ Page({
       currentPage: currentPage, 
       showCount: showCount
     }
-    if (this.data.selectPro != '-1' && this.data.selectPro != -1) {
+    if (this.data.pro_type != null && this.data.pro_type.length > 0) {
       data.BRAND_ID = this.data.pro_type[this.data.selectPro].bianma
     }
-    if (this.data.selectPing != '-1' && this.data.selectPing != -1) {
+    if (this.data.ping_type != null && this.data.ping_type.length > 0) {
       data.PRODUCT_TYPE_ID = this.data.ping_type[this.data.selectPing].bianma
+    }
+    if (this.data.series_type != null && this.data.series_type.length > 0) {
+      data.SERIES_ID = this.data.series_type[this.data.selectSeries].bianma
     }
     http.httpPost("/app/product/list", data, {}, function (res) {
       if(res.code == '000000') {

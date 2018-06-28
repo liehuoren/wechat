@@ -20,11 +20,12 @@
   <view class="classify">
 	<view class="nav_left" bindscrolltolower="getMore" bindscrolltoupper="onRefresh">
 		<scroll-view scroll-y="true" style="height: 100%;">
-        <view bindtap="changeTab" data-index="-1" class="nav_left_item {{ selectPro === '-1' ? 'active' : '' }}">
-          全部
-        </view>
         <view bindtap="changeTab" data-index="{{ index }}" data-id="{{ item.id }}" class="nav_left_item {{ selectPro === index ? 'active' : '' }}" wx:for="{{ pro_type }}" wx:key="name">
           {{ item.name }}
+          <view class="nav_left_menu">
+            <view class="nav_left_ite first">全部</view>
+            <view wx:for="{{ series_type }}" data-index="{{ ind }}" wx:for-index="ind" wx:for-item="ite" wx:key="name" class="nav_left_ite">{{ ite.name }}</view>
+          </view>
         </view>
       </scroll-view>
 	</view>
