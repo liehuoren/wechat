@@ -33,9 +33,10 @@ Page({
     series_type: [],
     selectPro: 0,
     selectPing: 0,
-    selectSeries: 0,
-    deviceHeight: 500
-
+    selectSeries: -1,
+    deviceHeight: 500,
+    seriesHeight: 0,
+    isShow: false
   },
 
   /**
@@ -66,11 +67,29 @@ Page({
     });
   },
   changeTab(e) {
+    let index = parseInt(e.currentTarget.dataset.index)
+    let seriesHeight = index * 80
+    let selectSeries = -1
+    let isShow = true
+    if (this.data.selectPro === index) {
+      selectSeries = this.data.selectSeries
+      isShow = !this.data.isShow
+    }
     this.setData({
-      selectPro: e.currentTarget.dataset.index
+      selectPro: index,
+      seriesHeight: seriesHeight,
+      isShow: isShow,
+      selectSeries: selectSeries
     });
     this.getSeriesType(this.data.pro_type[this.data.selectPro].bianma)
-
+  },
+  changeSeries(e) {
+    let index = parseInt(e.currentTarget.dataset.index)
+    this.setData({
+      selectSeries: index,
+      isShow: false
+    });
+    this.getProducts(1, 10)
   },
   getSeriesType(code) {
     var that = this
@@ -78,8 +97,8 @@ Page({
       if (res.code == '000000') {
         util.upperListKey(res.data)
         that.setData({
-          serise_type: res.data,
-          selectSerise: 0
+          series_type: res.data,
+          selectSerise: -1
         })
         that.getProducts(1, 10)
       }
@@ -97,7 +116,7 @@ Page({
         if (that.data.pro_type != null && that.data.pro_type.length > 0) {
           that.getSeriesType(that.data.pro_type[0].bianma)
         }
-        
+        that.getProducts(1, 10)
       }
     })
   },
@@ -113,7 +132,7 @@ Page({
         if (that.data.ping_type != null && that.data.ping_type.length > 0) {
           that.getProType(that.data.ping_type[0].bianma)
         }
-        
+        that.getProducts(1, 10)
       }
     })
   },
@@ -128,7 +147,9 @@ Page({
       success: function (res) {
         if (!res.cancel) {
           that.setData({
-            selectPing: res.tapIndex
+            selectPing: res.tapIndex,
+            isShow: false,
+            selectPro: 0
           })
           that.getProType(that.data.ping_type[that.data.selectPing].bianma)
         }
@@ -147,7 +168,7 @@ Page({
     if (this.data.ping_type != null && this.data.ping_type.length > 0) {
       data.PRODUCT_TYPE_ID = this.data.ping_type[this.data.selectPing].bianma
     }
-    if (this.data.series_type != null && this.data.series_type.length > 0) {
+    if (this.data.series_type != null && this.data.series_type.length > 0 && this.data.selectSeries != -1) {
       data.SERIES_ID = this.data.series_type[this.data.selectSeries].bianma
     }
     http.httpPost("/app/product/list", data, {}, function (res) {

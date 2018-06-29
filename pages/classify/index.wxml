@@ -22,14 +22,11 @@
 		<scroll-view scroll-y="true" style="height: 100%;">
         <view bindtap="changeTab" data-index="{{ index }}" data-id="{{ item.id }}" class="nav_left_item {{ selectPro === index ? 'active' : '' }}" wx:for="{{ pro_type }}" wx:key="name">
           {{ item.name }}
-          <view class="nav_left_menu">
-            <view class="nav_left_ite first">全部</view>
-            <view wx:for="{{ series_type }}" data-index="{{ ind }}" wx:for-index="ind" wx:for-item="ite" wx:key="name" class="nav_left_ite">{{ ite.name }}</view>
-          </view>
+          
         </view>
       </scroll-view>
 	</view>
-	<view class="nav_right" style="height: 100%;">
+	 <view class="nav_right" style="height: 100%;">
 		<view class="content" style="height: 100%;">
 			<scroll-view scroll-y="true" style="height: 100%; min-height: 500px" bindscrolltolower="getMoreGoods" bindscrolltoupper="onRefreshGoods">
 				<template is="list" data="{{ goods, prompt }}"/>
@@ -37,7 +34,10 @@
 		</view>
 	</view>
 </view>
-
+<view class="nav_left_menu" wx:if="{{ isShow }}" style="top: {{90 + seriesHeight}}rpx">
+  <view class="nav_left_ite first {{ selectSeries === -1 ? 'active' : '' }}" data-index="-1" bindtap="changeSeries">全部</view>
+  <view wx:for="{{ series_type }}" data-index="{{ index }}" wx:for-index="index" wx:for-item="item" wx:key="name" class="nav_left_ite {{ selectSeries === index ? 'active' : '' }} " bindtap="changeSeries">{{ item.name }}</view>
+</view>
 </view>
 <view class="select" bindtap='selectPing'>
   <image src="/images/select.png"></image>

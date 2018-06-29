@@ -42,7 +42,7 @@
 <view class="container">
   <view class="tab">
     <text class="{{ tabAction == 'details' ? 'active': '' }}" data-tab="details" bindtap="tabClick">商品详情</text>
-    <text class="{{ tabAction == 'parameter' ? 'active': '' }}" data-tab="parameter" bindtap="tabClick">商品参数</text>
+    <!-- <text class="{{ tabAction == 'parameter' ? 'active': '' }}" data-tab="parameter" bindtap="tabClick">商品参数</text> -->
   </view>
   <view class="tab-content">
     <view class="tab-details {{ tabAction == 'details' ? 'active': '' }}">
@@ -53,7 +53,7 @@
     </view>
     <view class="tab-parameter {{ tabAction == 'parameter' ? 'active': '' }}">
       <block wx:for="{{product_params}}" wx:key="param_id">
-        <view class="weui-cells weui-cells_after-title parameter">
+        <!-- <view class="weui-cells weui-cells_after-title parameter">
           <view class="weui-cell">
               <view class="weui-cell__hd"><view class="weui-label">型号</view></view>
               <view class="weui-cell__bd">{{item.param_type_name}}</view>
@@ -62,7 +62,7 @@
               <view class="weui-cell__hd"><view class="weui-label">品牌</view></view>
               <view class="weui-cell__bd">{{item.param_brand_name}} {{param_remark}}</view>
           </view>
-        </view>
+        </view> -->
       </block>
     </view>
   </view>
