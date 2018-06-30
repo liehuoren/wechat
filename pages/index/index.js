@@ -33,7 +33,7 @@ Page({
     }
   },
   
-  onLoad: function () {
+  onShow: function () {
     var that = this
     http.httpPost("/app/home/top", '', {}, function (res) {
       util.upperJSONKey(res.data)
@@ -85,7 +85,11 @@ Page({
     http.httpPost("/app/home/hotproducts", { currentPage: currentPage, showCount: showCount}, {}, function (res) {
       util.upperJSONKey(res.data)
       util.upperListKey(res.data.hot_project_list)
-      var product_list = that.data.goods.product_list.concat(res.data.hot_project_list)
+      if (currentPage == 1) {
+        var product_list = res.data.hot_project_list
+      } else {
+        var product_list = that.data.goods.product_list.concat(res.data.hot_project_list)
+      }
       var page = res.data.page
       var goods = { product_list, page }
       that.setData({

@@ -31,33 +31,36 @@ Page({
     buyNumMax: 1000,
     buyNumMin: 1,
     hideShopPopup: true,
-    selectSpecification:''
+    selectSpecification:'',
+    id: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
-    let that = this
-    if (options) {
-      http.httpPost("/app/product/id", { PRODUCT_ID: options.id}, {}, function (res) {
-        util.upperJSONKey(res.data)
-        util.upperJSONKey(res.data.product)
-        util.upperListKey(res.data.product_images)
-        util.upperListKey(res.data.product_params)
-        util.upperListKey(res.data.product_specifications)
+    this.setData({
+      id: options.id
+    })
+  },
+  onShow() {
+    var that = this
+    http.httpPost("/app/product/id", { PRODUCT_ID: that.data.id }, {}, function (res) {
+      util.upperJSONKey(res.data)
+      util.upperJSONKey(res.data.product)
+      util.upperListKey(res.data.product_images)
+      util.upperListKey(res.data.product_params)
+      util.upperListKey(res.data.product_specifications)
 
-        that.setData({
-          product: res.data.product,
-          product_images: res.data.product_images,
-          product_params: res.data.product_params,
-          product_specifications: res.data.product_specifications
-        })
-
-        WxParse.wxParse('article', 'html', res.data.product.product_detail, that, 5);
+      that.setData({
+        product: res.data.product,
+        product_images: res.data.product_images,
+        product_params: res.data.product_params,
+        product_specifications: res.data.product_specifications
       })
-    }
+
+      WxParse.wxParse('article', 'html', res.data.product.product_detail, that, 5);
+    })
   },
   selectSpecification(e) {
     var index = e.currentTarget.dataset.index

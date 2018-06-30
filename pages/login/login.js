@@ -26,7 +26,7 @@ Page({
   login () {
 
     let that = this
-    var reg = /^((17[0-9])|(14[0-9])|(13[0-9])|(15[0-9])|(18[0,5-9]))\d{8}$/
+    var reg = /^((17[0-9])|(14[0-9])|(13[0-9])|(15[0-9])|(18[0-9]))\d{8}$/
     if (!reg.test(this.data.mobile)) {
       wx.showToast({
         title: '手机号码格式不正确',
